@@ -4,6 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Luxury Creative Studio & PR Partner in Panama | Studio Co Labs</title>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YCEY3CG0VL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YCEY3CG0VL');
+  </script>
+
   <meta name="description" content="Studio Co Labs is a Panama City creative studio and PR partner for luxury brands, crafting strategic collaborations, cultural experiences, content and events across Latin America." />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="author" content="Studio Co Labs" />
@@ -56,7 +66,7 @@
           "name": "Studio Co Labs",
           "alternateName": "CO.LABS",
           "description": "Studio Co Labs is a Panama City creative studio and PR partner for luxury brands, crafting strategic collaborations, cultural experiences, content and events across Latin America.",
-          "email": "hello@colabs.com",
+          "email": "Contact@studiocolabs.com",
           "telephone": "+50769604183",
           "address": {
             "@type": "PostalAddress",
@@ -121,7 +131,7 @@
             {
               "@type": "ContactPoint",
               "contactType": "new business",
-              "email": "hello@colabs.com",
+              "email": "Contact@studiocolabs.com",
               "telephone": "+50769604183",
               "availableLanguage": ["English", "Spanish"]
             },
@@ -1306,6 +1316,10 @@
       place-items: center;
       border: 1px solid rgba(245,241,233,.72);
       border-radius: 50%;
+      padding: 0;
+      color: var(--paper);
+      background: transparent;
+      cursor: pointer;
       text-align: center;
       font: 10px/1.35 var(--mono);
       letter-spacing: .07em;
@@ -1319,37 +1333,14 @@
       border-bottom: 1px solid rgba(245,241,233,.42);
       transition: color .2s ease, border-color .2s ease;
     }
+    .contact-details > a {
+      min-height: var(--tap-size);
+      display: inline-flex;
+      align-items: center;
+    }
     .contact-details a:hover {
       color: var(--paper);
       border-color: currentColor;
-    }
-    .contact-phone-line {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .whatsapp-link {
-      width: 32px;
-      height: 32px;
-      display: inline-grid;
-      place-items: center;
-      border: 1px solid rgba(245,241,233,.48) !important;
-      border-radius: 50%;
-      color: rgba(245,241,233,.9);
-      vertical-align: middle;
-      transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
-    }
-    .whatsapp-link:hover {
-      color: var(--ink);
-      background: var(--paper);
-      border-color: var(--paper) !important;
-      transform: translateY(-1px);
-    }
-    .whatsapp-link svg {
-      width: 16px;
-      height: 16px;
-      display: block;
-      fill: currentColor;
     }
     .footer {
       padding-top: 22px;
@@ -1372,7 +1363,7 @@
     }
     .footer-links { display: flex; flex-wrap: wrap; gap: 18px; justify-self: end; color: rgba(245,241,233,.76); }
     .footer-links a {
-      min-height: 36px;
+      min-height: var(--tap-size);
       display: inline-flex;
       align-items: center;
     }
@@ -1440,6 +1431,7 @@
       width: min(1480px, 100%);
       height: min(860px, calc(100svh - 36px));
       height: min(860px, calc(100dvh - 36px));
+      min-height: 0;
       display: grid;
       grid-template-rows: 72px minmax(0,1fr);
       overflow: hidden;
@@ -1501,6 +1493,7 @@
       min-height: 0;
       display: grid;
       grid-template-columns: minmax(285px,.74fr) minmax(0,1.55fr);
+      overflow: hidden;
     }
     .gallery-info {
       min-height: 0;
@@ -1559,6 +1552,7 @@
       overflow: hidden;
       display: grid;
       place-items: center;
+      touch-action: pan-y;
     }
     .gallery-main-image {
       position: absolute;
@@ -1569,6 +1563,37 @@
       object-position: center;
       transition: opacity .24s ease, transform .35s var(--ease);
     }
+    .gallery-main-image.is-broken { opacity: .2; }
+    .gallery-image-status {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      color: rgba(245,241,233,.78);
+      font: 10px/1.4 var(--mono);
+      letter-spacing: .08em;
+      text-align: center;
+      text-transform: uppercase;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .gallery-image-wrap.is-loading .gallery-image-status,
+    .gallery-image-wrap.is-broken .gallery-image-status { opacity: 1; }
+    .gallery-image-wrap.is-loading .gallery-image-status::before {
+      content: "";
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(245,241,233,.35);
+      border-top-color: var(--paper);
+      border-radius: 50%;
+      animation: gallery-spin .8s linear infinite;
+    }
+    .gallery-image-wrap.is-loading .gallery-image-status { color: transparent; }
+    .gallery-image-wrap.is-broken .gallery-image-status { color: rgba(245,241,233,.78); }
+    @keyframes gallery-spin { to { transform: rotate(360deg); } }
     .gallery-image-wrap.is-changing .gallery-main-image {
       opacity: .1;
       transform: scale(1.015);
@@ -1606,10 +1631,15 @@
       backdrop-filter: blur(7px);
     }
     .gallery-thumbnails {
+      box-sizing: border-box;
+      min-width: 0;
+      flex: none;
       display: flex;
       gap: 8px;
       padding: 12px;
       overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x proximity;
       border-top: 1px solid rgba(245,241,233,.2);
       background: #1b1916;
       scrollbar-width: thin;
@@ -1623,6 +1653,7 @@
       background: transparent;
       opacity: .56;
       min-width: 72px;
+      scroll-snap-align: start;
       transition: opacity .2s ease, border-color .2s ease;
     }
     .gallery-thumb.active { opacity: 1; border-color: var(--paper); }
@@ -1739,18 +1770,194 @@
       bottom: max(16px, env(safe-area-inset-bottom));
       display: grid;
       place-items: center;
-      width: 43px;
-      height: 43px;
-      border: 0;
+      width: 52px;
+      height: 52px;
+      border: 1px solid rgba(16,16,15,.14);
+      border-radius: 50%;
       color: var(--ink);
-      background: var(--paper);
-      box-shadow: 0 8px 24px rgba(0,0,0,.18);
+      background: rgba(245,241,233,.96);
+      box-shadow: 0 10px 28px rgba(0,0,0,.2);
       opacity: 0;
       visibility: hidden;
       transform: translateY(12px);
-      transition: .25s ease;
+      transition: opacity .25s ease, visibility .25s ease, transform .25s ease, background .2s ease;
     }
     .to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .to-top.visible:hover,
+    .to-top.visible:focus-visible { background: var(--paper); transform: translateY(-3px); }
+
+    .whatsapp-widget {
+      position: fixed;
+      z-index: 45;
+      right: max(16px, env(safe-area-inset-right));
+      bottom: max(16px, env(safe-area-inset-bottom));
+    }
+    .to-top.visible + .whatsapp-widget { bottom: calc(max(16px, env(safe-area-inset-bottom)) + 62px); }
+    .whatsapp-float {
+      width: 52px;
+      min-width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      color: #fff;
+      background: #1fbd5b;
+      box-shadow: 0 12px 30px rgba(16,16,15,.24), 0 0 0 1px rgba(255,255,255,.22) inset;
+      font: 10px/1 var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: transform .25s var(--ease), box-shadow .25s ease, background .25s ease;
+    }
+    .whatsapp-float:hover,
+    .whatsapp-widget.is-open .whatsapp-float {
+      background: #159b49;
+      box-shadow: 0 16px 36px rgba(16,16,15,.28), 0 0 0 1px rgba(255,255,255,.25) inset;
+      transform: translateY(-3px);
+    }
+    .whatsapp-float svg { width: 22px; height: 22px; fill: currentColor; }
+    .whatsapp-float-label { display: none; }
+    .whatsapp-panel {
+      position: absolute;
+      right: 0;
+      bottom: calc(100% + 14px);
+      width: min(370px, calc(100vw - 32px));
+      max-height: min(72dvh, 560px);
+      overflow-y: auto;
+      padding: 22px;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid rgba(16,16,15,.14);
+      box-shadow: 0 24px 70px rgba(16,16,15,.28);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(12px) scale(.98);
+      transform-origin: bottom right;
+      transition: opacity .24s ease, visibility .24s ease, transform .32s var(--ease);
+    }
+    .whatsapp-widget.is-open .whatsapp-panel {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+    .whatsapp-panel-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .whatsapp-panel-kicker,
+    .whatsapp-panel label,
+    .whatsapp-count,
+    .whatsapp-status {
+      font: 10px/1.3 var(--mono);
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+    .whatsapp-panel-kicker { color: #148f45; }
+    .whatsapp-panel h2 {
+      max-width: 280px;
+      margin: 9px 0 0;
+      font: 34px/.9 var(--serif);
+      letter-spacing: -.045em;
+    }
+    .whatsapp-panel-close {
+      width: var(--tap-size);
+      height: var(--tap-size);
+      display: grid;
+      place-items: center;
+      flex: 0 0 var(--tap-size);
+      border: 1px solid var(--line-dark);
+      background: transparent;
+      color: var(--ink);
+    }
+    .whatsapp-panel-close .gallery-close-mark { width: 16px; height: 16px; }
+    .whatsapp-panel-close .gallery-close-mark::before,
+    .whatsapp-panel-close .gallery-close-mark::after { width: 18px; top: 7px; }
+    .whatsapp-panel-intro {
+      margin: 18px 0 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: rgba(16,16,15,.7);
+    }
+    .whatsapp-quick-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 18px;
+    }
+    .whatsapp-quick {
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-dark);
+      color: var(--ink);
+      background: transparent;
+      font: 9px/1.2 var(--mono);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      transition: color .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .whatsapp-quick:hover,
+    .whatsapp-quick:focus-visible { color: #fff; border-color: #1fbd5b; background: #1fbd5b; }
+    .whatsapp-panel label { display: block; margin-bottom: 8px; color: rgba(16,16,15,.6); }
+    .whatsapp-message {
+      width: 100%;
+      min-height: 104px;
+      display: block;
+      resize: vertical;
+      padding: 13px;
+      border: 1px solid var(--line-dark);
+      border-radius: 0;
+      outline: 0;
+      color: var(--ink);
+      background: rgba(255,255,255,.28);
+      font-size: 14px;
+      line-height: 1.45;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .whatsapp-message:focus { border-color: #1fbd5b; box-shadow: 0 0 0 3px rgba(31,189,91,.14); }
+    .whatsapp-message::placeholder { color: rgba(16,16,15,.48); }
+    .whatsapp-form-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .whatsapp-count { color: rgba(16,16,15,.48); }
+    .whatsapp-submit {
+      min-height: var(--tap-size);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 13px;
+      border: 0;
+      color: #fff;
+      background: #1fbd5b;
+      font: 10px/1 var(--mono);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .whatsapp-submit:hover:not(:disabled) { transform: translateY(-1px); }
+    .whatsapp-submit:disabled { cursor: not-allowed; opacity: .38; }
+    .whatsapp-submit span { font-size: 15px; }
+    .whatsapp-status { min-height: 13px; margin: 9px 0 0; color: #b34c3a; }
+    @media (min-width: 641px) {
+      .whatsapp-widget { right: max(24px, env(safe-area-inset-right)); bottom: max(24px, env(safe-area-inset-bottom)); }
+      .to-top { right: max(24px, env(safe-area-inset-right)); bottom: max(24px, env(safe-area-inset-bottom)); }
+      .to-top.visible + .whatsapp-widget { bottom: calc(max(24px, env(safe-area-inset-bottom)) + 62px); }
+    }
+    @media (max-width: 640px) {
+      .whatsapp-widget { right: max(16px, env(safe-area-inset-right)); }
+      .whatsapp-panel { padding: 20px; }
+      .whatsapp-panel h2 { font-size: clamp(30px, 9vw, 38px); }
+      .whatsapp-quick { min-height: 44px; }
+    }
     .reveal {
       opacity: 0;
       transform: translateY(28px);
@@ -1912,10 +2119,16 @@
       .gallery-top {
         padding: env(safe-area-inset-top) max(20px, env(safe-area-inset-right)) 0 max(20px, env(safe-area-inset-left));
       }
-      .gallery-body { grid-template-columns: 1fr; grid-template-rows: minmax(0,1fr) auto; overflow-y: auto; }
+      .gallery-body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        align-content: start;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
       .gallery-info {
         order: 2;
-        min-height: auto;
+        min-height: 0;
         padding: 28px max(20px, env(safe-area-inset-right)) max(32px, calc(24px + env(safe-area-inset-bottom))) max(20px, env(safe-area-inset-left));
         border-top: 1px solid var(--line-dark);
         border-right: 0;
@@ -1924,12 +2137,18 @@
       .gallery-info h2 { font-size: 54px; }
       .gallery-note { display: none; }
       .gallery-stage {
-        min-height: 54svh;
-        min-height: 54dvh;
+        min-height: 0;
+        height: auto;
+        grid-template-rows: auto auto;
       }
-      .gallery-image-wrap { --gallery-image-pad: 10px; }
+      .gallery-image-wrap {
+        --gallery-image-pad: 10px;
+        height: auto;
+        aspect-ratio: 4 / 3;
+      }
+      .gallery-main-image { object-fit: cover; }
       .gallery-nav { inset-inline: 12px; }
-      .gallery-nav button { width: 40px; height: 40px; }
+      .gallery-nav button { width: var(--tap-size); height: var(--tap-size); }
       .gallery-count { left: 12px; bottom: 12px; }
       .gallery-thumb { flex-basis: 64px; height: 50px; }
       .privacy-overlay { padding: 0; }
@@ -1955,6 +2174,50 @@
         display: inline-flex;
         align-items: center;
       }
+    }
+
+    @media (min-width: 641px) and (max-width: 960px) and (max-height: 620px) {
+      .gallery-overlay { padding: 0; }
+      .gallery-shell {
+        width: 100%;
+        height: 100svh;
+        height: 100dvh;
+        grid-template-rows: calc(62px + env(safe-area-inset-top)) minmax(0,1fr);
+      }
+      .gallery-top {
+        padding: env(safe-area-inset-top) max(20px, env(safe-area-inset-right)) 0 max(20px, env(safe-area-inset-left));
+      }
+      .gallery-body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        align-content: start;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+      .gallery-info {
+        order: 2;
+        min-height: 0;
+        padding: 24px max(28px, env(safe-area-inset-right)) max(30px, calc(24px + env(safe-area-inset-bottom))) max(28px, env(safe-area-inset-left));
+        border-top: 1px solid var(--line-dark);
+        border-right: 0;
+        overflow: visible;
+      }
+      .gallery-info h2 { font-size: clamp(43px, 8vw, 60px); }
+      .gallery-note { display: none; }
+      .gallery-stage {
+        min-height: 0;
+        height: auto;
+        grid-template-rows: auto auto;
+      }
+      .gallery-image-wrap {
+        --gallery-image-pad: 10px;
+        height: auto;
+        aspect-ratio: 16 / 9;
+      }
+      .gallery-main-image { object-fit: cover; }
+      .gallery-nav { inset-inline: 12px; }
+      .gallery-nav button { width: var(--tap-size); height: var(--tap-size); }
+      .gallery-count { left: 12px; bottom: 12px; }
     }
 
     @media (max-width: 430px) {
@@ -2170,7 +2433,7 @@
               <div class="eyebrow">Selected Project</div>
               <h3>BVLGARI<br><em>Boutique Opening Celebration</em></h3>
               <p data-i18n="projectBvlgari">An intimate brand moment where luxury, hospitality and cultural relevance came together in one carefully designed experience.</p>
-              <div class="project-meta"><span>2024</span><span>Luxury</span><span>Private Event</span></div>
+              <div class="project-meta"><span>2026</span><span>Luxury</span><span>Private Event</span></div>
               <button class="button-link gallery-trigger gallery-link" type="button" data-gallery="bvlgari"><span data-i18n="viewGallery">View Gallery</span><span class="arrow"></span></button>
             </div>
           </article>
@@ -2366,18 +2629,11 @@
         <h2 id="contactTitle" data-i18n-html="contactTitle">A good story<br>deserves a <em>moment.</em></h2>
 
         <div class="contact-row">
-          <a class="contact-circle" href="mailto:hello@colabs.com" data-i18n-html="contactCta">Start a<br>conversation</a>
+          <button class="contact-circle" id="contactWhatsappOpen" type="button" aria-controls="whatsappPanel" aria-expanded="false" data-i18n-html="contactCta">Start a<br>conversation</button>
           <p class="contact-details">
             Panama City<br><br>
-            <a href="mailto:hello@colabs.com">hello@colabs.com</a><br>
-            <span class="contact-phone-line">
-              <a href="tel:+50769604183">+507 6960-4183</a>
-              <a class="whatsapp-link" href="https://wa.me/50769604183?text=Hi%20CO.LABS!%20I%27d%20love%20to%20learn%20more%20about%20your%20services." target="_blank" rel="noopener" aria-label="Contact Studio Co Labs on WhatsApp">
-                <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-                  <path d="M16.02 4C9.41 4 4.05 9.34 4.05 15.92c0 2.1.55 4.16 1.6 5.97L4 28l6.28-1.62a12.05 12.05 0 0 0 5.74 1.46c6.6 0 11.98-5.34 11.98-11.92C28 9.34 22.62 4 16.02 4Zm0 21.82c-1.8 0-3.56-.48-5.1-1.38l-.36-.21-3.72.96.99-3.61-.24-.37a9.8 9.8 0 0 1-1.5-5.29c0-5.46 4.45-9.9 9.93-9.9 5.49 0 9.95 4.44 9.95 9.9 0 5.45-4.46 9.9-9.95 9.9Zm5.45-7.4c-.3-.15-1.76-.86-2.03-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.95 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47a9 9 0 0 1-1.66-2.06c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.48.71.3 1.27.49 1.7.63.71.22 1.36.19 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.3.18-1.42-.07-.13-.27-.2-.57-.35Z"/>
-                </svg>
-              </a>
-            </span>
+            <a href="mailto:Contact@studiocolabs.com">Contact@studiocolabs.com</a><br>
+            <a href="tel:+50769604183">+507 6960-4183</a>
           </p>
         </div>
 
@@ -2385,7 +2641,7 @@
           <span class="footer-note">© <span id="year"></span> Studio Co Labs</span>
           <a class="footer-brand" href="#home">Studio Co Labs</a>
           <nav class="footer-links">
-            <a href="https://www.instagram.com/ferjaraa/" target="_blank" rel="noopener" data-i18n="footerInstagram">Instagram</a>
+            <a href="https://www.instagram.com/studiocolabs/" target="_blank" rel="noopener" data-i18n="footerInstagram">Instagram</a>
             <a href="https://www.linkedin.com/in/fernando-jaramuzchett-alvarado-0398ab5b/" target="_blank" rel="noopener" data-i18n="footerLinkedIn">LinkedIn</a>
             <a href="#privacy" id="privacyOpen" data-i18n="footerPrivacy">Privacy</a>
           </nav>
@@ -2413,7 +2669,7 @@
           <li><strong>Retention</strong>We keep inquiry and project information only as long as useful for communication, project records, legal/accounting needs or future collaboration context.</li>
           <li><strong>Your choices</strong>You may ask us to update or delete your contact information, or request that we stop contacting you about future opportunities.</li>
         </ul>
-        <p>For privacy questions or requests, contact <a href="mailto:hello@colabs.com">hello@colabs.com</a> or reach us through WhatsApp at <a href="https://wa.me/50769604183?text=Hi%20CO.LABS!%20I%27d%20love%20to%20learn%20more%20about%20your%20services." target="_blank" rel="noopener">+507 6960-4183</a>.</p>
+        <p>For privacy questions or requests, contact <a href="mailto:Contact@studiocolabs.com">Contact@studiocolabs.com</a> or reach us through WhatsApp at <a href="https://wa.me/50769604183?text=Hi%20CO.LABS!%20I%27d%20love%20to%20learn%20more%20about%20your%20services." target="_blank" rel="noopener">+507 6960-4183</a>.</p>
       </div>
     </section>
   </div>
@@ -2438,7 +2694,8 @@
 
         <div class="gallery-stage">
           <div class="gallery-image-wrap" id="galleryImageWrap">
-            <img class="gallery-main-image" id="galleryMainImage" src="" alt="">
+            <img class="gallery-main-image" id="galleryMainImage" src="" alt="" decoding="async" fetchpriority="high">
+            <span class="gallery-image-status" id="galleryImageStatus" role="status" aria-live="polite"></span>
             <div class="gallery-nav">
               <button id="galleryPrevious" type="button" aria-label="Previous gallery image">←</button>
               <button id="galleryNext" type="button" aria-label="Next gallery image">→</button>
@@ -2452,6 +2709,43 @@
   </div>
 
   <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+  <div class="whatsapp-widget" id="whatsappWidget">
+    <section class="whatsapp-panel" id="whatsappPanel" role="dialog" aria-modal="false" aria-labelledby="whatsappTitle" aria-hidden="true">
+      <div class="whatsapp-panel-top">
+        <div>
+          <div class="whatsapp-panel-kicker" data-whatsapp-copy="kicker">Studio Co Labs</div>
+          <h2 id="whatsappTitle" data-whatsapp-copy="title">Let’s talk about your project.</h2>
+        </div>
+        <button class="whatsapp-panel-close" id="whatsappClose" type="button" aria-label="Close WhatsApp contact panel">
+          <span class="gallery-close-mark" aria-hidden="true"></span>
+        </button>
+      </div>
+      <p class="whatsapp-panel-intro" data-whatsapp-copy="intro">Tell us what you have in mind and we’ll open WhatsApp with your message ready.</p>
+      <div class="whatsapp-quick-list" aria-label="Quick message options">
+        <button class="whatsapp-quick" type="button" data-whatsapp-message="project" data-whatsapp-copy="quickProject">Start a project</button>
+        <button class="whatsapp-quick" type="button" data-whatsapp-message="services" data-whatsapp-copy="quickServices">Ask about services</button>
+        <button class="whatsapp-quick" type="button" data-whatsapp-message="consultation" data-whatsapp-copy="quickConsultation">Book a consultation</button>
+      </div>
+      <form id="whatsappForm" novalidate>
+        <label for="whatsappMessage" data-whatsapp-copy="label">Your message</label>
+        <textarea class="whatsapp-message" id="whatsappMessage" name="message" maxlength="500" placeholder="Write a message…" data-whatsapp-copy-placeholder="placeholder"></textarea>
+        <div class="whatsapp-form-bottom">
+          <span class="whatsapp-count" id="whatsappCount">0 / 500</span>
+          <button class="whatsapp-submit" id="whatsappSubmit" type="submit" disabled>
+            <span data-whatsapp-copy="send">Continue in WhatsApp</span><span aria-hidden="true">↗</span>
+          </button>
+        </div>
+        <p class="whatsapp-status" id="whatsappStatus" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <button class="whatsapp-float" id="whatsappOpen" type="button" aria-expanded="false" aria-controls="whatsappPanel" aria-label="Open WhatsApp contact panel">
+      <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path d="M16.02 4C9.41 4 4.05 9.34 4.05 15.92c0 2.1.55 4.16 1.6 5.97L4 28l6.28-1.62a12.05 12.05 0 0 0 5.74 1.46c6.6 0 11.98-5.34 11.98-11.92C28 9.34 22.62 4 16.02 4Zm0 21.82c-1.8 0-3.56-.48-5.1-1.38l-.36-.21-3.72.96.99-3.61-.24-.37a9.8 9.8 0 0 1-1.5-5.29c0-5.46 4.45-9.9 9.93-9.9 5.49 0 9.95 4.44 9.95 9.9 0 5.45-4.46 9.9-9.95 9.9Zm5.45-7.4c-.3-.15-1.76-.86-2.03-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.95 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47a9 9 0 0 1-1.66-2.06c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.48.71.3 1.27.49 1.7.63.71.22 1.36.19 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.3.18-1.42-.07-.13-.27-.2-.57-.35Z"/>
+      </svg>
+      <span class="whatsapp-float-label" data-whatsapp-copy="button">WhatsApp</span>
+    </button>
+  </div>
 
   <script>
     const texts = {
@@ -2736,13 +3030,111 @@
     const menuPreviewTitle = document.getElementById("menuPreviewTitle");
     const menuInfo = document.getElementById("menuInfo");
     const menuPreviewCopy = document.querySelector(".menu-preview-copy");
+    const pageContent = [header, document.querySelector("main"), toTop].filter(Boolean);
     const privacyOverlay = document.getElementById("privacyOverlay");
     const privacyOpen = document.getElementById("privacyOpen");
     const privacyClose = document.getElementById("privacyClose");
     let activeLanguage = "en";
     let activeMenuPanel = "studio";
     let menuPanelTimer;
+    let menuTriggerOrigin = null;
     const modalHistoryKey = "studioCoLabsModal";
+    const whatsappNumber = "50769604183";
+    const whatsappWidget = document.getElementById("whatsappWidget");
+    const whatsappPanel = document.getElementById("whatsappPanel");
+    const whatsappOpen = document.getElementById("whatsappOpen");
+    const contactWhatsappOpen = document.getElementById("contactWhatsappOpen");
+    const whatsappClose = document.getElementById("whatsappClose");
+    const whatsappForm = document.getElementById("whatsappForm");
+    const whatsappMessage = document.getElementById("whatsappMessage");
+    const whatsappCount = document.getElementById("whatsappCount");
+    const whatsappSubmit = document.getElementById("whatsappSubmit");
+    const whatsappStatus = document.getElementById("whatsappStatus");
+    const whatsappCopy = {
+      en: {
+        kicker: "Studio Co Labs", title: "Let’s talk about your project.", intro: "Tell us what you have in mind and we’ll open WhatsApp with your message ready.", label: "Your message", placeholder: "Write a message…", send: "Continue in WhatsApp", button: "Open WhatsApp contact panel", empty: "Write a message before continuing.", close: "Close WhatsApp contact panel", quickProject: "Start a project", quickServices: "Ask about services", quickConsultation: "Book a consultation"
+      },
+      es: {
+        kicker: "Studio Co Labs", title: "Hablemos de tu proyecto.", intro: "Cuéntanos qué tienes en mente y abriremos WhatsApp con tu mensaje listo.", label: "Tu mensaje", placeholder: "Escribe un mensaje…", send: "Continuar en WhatsApp", button: "Abrir panel de contacto por WhatsApp", empty: "Escribe un mensaje antes de continuar.", close: "Cerrar panel de contacto por WhatsApp", quickProject: "Iniciar un proyecto", quickServices: "Consultar servicios", quickConsultation: "Agendar una consulta"
+      },
+      fr: {
+        kicker: "Studio Co Labs", title: "Parlons de votre projet.", intro: "Dites-nous ce que vous avez en tête et nous ouvrirons WhatsApp avec votre message prêt.", label: "Votre message", placeholder: "Écrivez un message…", send: "Continuer sur WhatsApp", button: "Ouvrir le panneau de contact WhatsApp", empty: "Écrivez un message avant de continuer.", close: "Fermer le panneau de contact WhatsApp", quickProject: "Démarrer un projet", quickServices: "Découvrir nos services", quickConsultation: "Planifier une consultation"
+      },
+      de: {
+        kicker: "Studio Co Labs", title: "Sprechen wir über Ihr Projekt.", intro: "Erzählen Sie uns, was Sie vorhaben. Wir öffnen WhatsApp mit Ihrer Nachricht.", label: "Ihre Nachricht", placeholder: "Nachricht schreiben…", send: "In WhatsApp fortfahren", button: "WhatsApp-Kontaktbereich öffnen", empty: "Schreiben Sie eine Nachricht, bevor Sie fortfahren.", close: "WhatsApp-Kontaktbereich schließen", quickProject: "Projekt starten", quickServices: "Services anfragen", quickConsultation: "Beratung buchen"
+      },
+      it: {
+        kicker: "Studio Co Labs", title: "Parliamo del tuo progetto.", intro: "Raccontaci cosa hai in mente e apriremo WhatsApp con il tuo messaggio pronto.", label: "Il tuo messaggio", placeholder: "Scrivi un messaggio…", send: "Continua su WhatsApp", button: "Apri il pannello di contatto WhatsApp", empty: "Scrivi un messaggio prima di continuare.", close: "Chiudi il pannello contatti WhatsApp", quickProject: "Inizia un progetto", quickServices: "Chiedi dei servizi", quickConsultation: "Prenota una consulenza"
+      },
+      pt: {
+        kicker: "Studio Co Labs", title: "Vamos falar sobre o seu projeto.", intro: "Conte-nos o que você tem em mente e abriremos o WhatsApp com sua mensagem pronta.", label: "Sua mensagem", placeholder: "Escreva uma mensagem…", send: "Continuar no WhatsApp", button: "Abrir painel de contacto do WhatsApp", empty: "Escreva uma mensagem antes de continuar.", close: "Fechar painel de contato do WhatsApp", quickProject: "Iniciar um projeto", quickServices: "Perguntar sobre serviços", quickConsultation: "Agendar uma consulta"
+      }
+    };
+    const whatsappMessages = {
+      en: {
+        project: "Hi Studio Co Labs! I’d love to talk about a project.",
+        services: "Hi Studio Co Labs! I’d like to learn more about your services.",
+        consultation: "Hi Studio Co Labs! I’d like to schedule a consultation."
+      },
+      es: {
+        project: "Hola Studio Co Labs. Me gustaría conversar sobre un proyecto.",
+        services: "Hola Studio Co Labs. Me gustaría conocer más sobre sus servicios.",
+        consultation: "Hola Studio Co Labs. Me gustaría agendar una consulta."
+      },
+      fr: {
+        project: "Bonjour Studio Co Labs ! J’aimerais parler d’un projet.",
+        services: "Bonjour Studio Co Labs ! J’aimerais en savoir plus sur vos services.",
+        consultation: "Bonjour Studio Co Labs ! J’aimerais planifier une consultation."
+      },
+      de: {
+        project: "Hallo Studio Co Labs! Ich würde gern über ein Projekt sprechen.",
+        services: "Hallo Studio Co Labs! Ich würde gern mehr über Ihre Services erfahren.",
+        consultation: "Hallo Studio Co Labs! Ich würde gern eine Beratung vereinbaren."
+      },
+      it: {
+        project: "Ciao Studio Co Labs! Vorrei parlare di un progetto.",
+        services: "Ciao Studio Co Labs! Vorrei saperne di più sui vostri servizi.",
+        consultation: "Ciao Studio Co Labs! Vorrei fissare una consulenza."
+      },
+      pt: {
+        project: "Olá Studio Co Labs! Gostaria de falar sobre um projeto.",
+        services: "Olá Studio Co Labs! Gostaria de saber mais sobre os seus serviços.",
+        consultation: "Olá Studio Co Labs! Gostaria de agendar uma consulta."
+      }
+    };
+
+    function renderWhatsappCopy(language) {
+      const copy = whatsappCopy[language] || whatsappCopy.en;
+      document.querySelectorAll("[data-whatsapp-copy]").forEach(node => {
+        const key = node.dataset.whatsappCopy;
+        if (copy[key] !== undefined) node.textContent = copy[key];
+      });
+      const placeholder = document.querySelector("[data-whatsapp-copy-placeholder]");
+      if (placeholder) placeholder.placeholder = copy.placeholder;
+      whatsappOpen.setAttribute("aria-label", copy.button);
+      whatsappClose.setAttribute("aria-label", copy.close);
+    }
+
+    function updateWhatsappComposer() {
+      const length = whatsappMessage.value.length;
+      whatsappCount.textContent = `${length} / 500`;
+      whatsappSubmit.disabled = !whatsappMessage.value.trim();
+      if (whatsappMessage.value.trim()) whatsappStatus.textContent = "";
+    }
+
+    function setWhatsappOpen(open, options = {}) {
+      const { focus = true } = options;
+      whatsappWidget.classList.toggle("is-open", open);
+      whatsappPanel.setAttribute("aria-hidden", String(!open));
+      whatsappOpen.setAttribute("aria-expanded", String(open));
+      contactWhatsappOpen.setAttribute("aria-expanded", String(open));
+      if (open) {
+        whatsappStatus.textContent = "";
+        if (focus) window.setTimeout(() => whatsappMessage.focus(), 80);
+      } else if (focus) {
+        window.setTimeout(() => whatsappOpen.focus(), 0);
+      }
+    }
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -2770,11 +3162,27 @@
       return privacyOverlay.classList.contains("open");
     }
 
+    function setPageContentInert(inert) {
+      pageContent.forEach(node => {
+        if (inert) node.setAttribute("inert", "");
+        else node.removeAttribute("inert");
+      });
+    }
+
+    function getOpenModalRoot() {
+      if (privacyOverlay.classList.contains("open")) return privacyOverlay;
+      if (document.getElementById("galleryOverlay")?.classList.contains("open")) return document.getElementById("galleryOverlay");
+      if (menuOverlay.classList.contains("open")) return menuOverlay;
+      return null;
+    }
+
     function updateModalLock() {
+      const locked = menuOverlay.classList.contains("open") || isGalleryOpen() || isPrivacyOpen();
       document.body.classList.toggle(
         "is-menu-open",
-        menuOverlay.classList.contains("open") || isGalleryOpen() || isPrivacyOpen()
+        locked
       );
+      setPageContentInert(locked);
     }
 
     function setMenu(open, options = {}) {
@@ -2784,12 +3192,14 @@
         return;
       }
       if (open && updateHistory) pushModalHistory("menu");
+      if (open) menuTriggerOrigin = document.activeElement;
       menuOverlay.classList.toggle("open", open);
       menuOverlay.setAttribute("aria-hidden", String(!open));
       menuOpen.setAttribute("aria-expanded", String(open));
       if (!open) clearModalHistory("menu");
       updateModalLock();
-      if (open) menuClose.focus();
+      if (open) window.setTimeout(() => menuClose.focus(), 60);
+      else window.setTimeout(() => menuTriggerOrigin?.focus?.(), 0);
     }
 
     function renderMenuPanel(panel) {
@@ -2840,7 +3250,7 @@
       privacyOverlay.classList.add("open");
       privacyOverlay.setAttribute("aria-hidden", "false");
       updateModalLock();
-      privacyClose.focus();
+      window.setTimeout(() => privacyClose.focus(), 60);
     }
 
     function closePrivacy(options = {}) {
@@ -2885,13 +3295,18 @@
       scrollToContact();
     });
 
+    function navigateMenuItem(button) {
+      const target = document.querySelector(button.dataset.target);
+      setMenu(false, { updateHistory: false });
+      if (!target) return;
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.replaceState(window.history.state, "", `#${target.id}`);
+    }
+
     menuButtons.forEach(button => {
-      button.addEventListener("click", () => updateMenuPanel(button.dataset.panel));
-      button.addEventListener("dblclick", () => {
-        const target = document.querySelector(button.dataset.target);
-        setMenu(false);
-        target?.scrollIntoView({ behavior: "smooth" });
-      });
+      button.addEventListener("pointerenter", () => updateMenuPanel(button.dataset.panel));
+      button.addEventListener("focus", () => updateMenuPanel(button.dataset.panel));
+      button.addEventListener("click", () => navigateMenuItem(button));
     });
 
     menuInfoLink.addEventListener("click", () => setMenu(false, { updateHistory: false }));
@@ -2899,6 +3314,10 @@
 
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
+        if (whatsappWidget.classList.contains("is-open")) {
+          setWhatsappOpen(false);
+          return;
+        }
         if (privacyOverlay.classList.contains("open")) {
           closePrivacy();
           return;
@@ -2912,6 +3331,35 @@
         langTrigger.setAttribute("aria-expanded", "false");
       }
     });
+
+    document.addEventListener("keydown", event => {
+      if (event.key !== "Tab") return;
+      const modal = getOpenModalRoot();
+      if (!modal) return;
+      const focusable = [...modal.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )].filter(node => {
+        const style = window.getComputedStyle(node);
+        return style.visibility !== "hidden" && style.display !== "none" && node.getClientRects().length > 0;
+      });
+      if (!focusable.length) {
+        event.preventDefault();
+        return;
+      }
+      const activeIndex = focusable.indexOf(document.activeElement);
+      if (activeIndex === -1) {
+        event.preventDefault();
+        focusable[0].focus();
+        return;
+      }
+      if (event.shiftKey && activeIndex === 0) {
+        event.preventDefault();
+        focusable[focusable.length - 1].focus();
+      } else if (!event.shiftKey && activeIndex === focusable.length - 1) {
+        event.preventDefault();
+        focusable[0].focus();
+      }
+    }, true);
 
     langTrigger.addEventListener("click", event => {
       event.stopPropagation();
@@ -2948,6 +3396,7 @@
 
       updateMenuPanel(activeMenuPanel || document.querySelector(".menu-item.active")?.dataset.panel || "studio", { animate: false });
       if (window.__galleryReady && openGalleryId) renderGallery();
+      renderWhatsappCopy(language);
       localStorage.setItem("studioCoLabsLanguage", language);
       langWrap.classList.remove("open");
       langTrigger.setAttribute("aria-expanded", "false");
@@ -2960,6 +3409,44 @@
     // English is explicitly the default language.
     const savedLanguage = localStorage.getItem("studioCoLabsLanguage");
     setLanguage(savedLanguage && texts[savedLanguage] ? savedLanguage : "en");
+
+    whatsappOpen.addEventListener("click", () => setWhatsappOpen(!whatsappWidget.classList.contains("is-open")));
+    contactWhatsappOpen.addEventListener("click", event => {
+      event.stopPropagation();
+      setWhatsappOpen(true);
+    });
+    whatsappClose.addEventListener("click", () => setWhatsappOpen(false));
+    whatsappMessage.addEventListener("input", updateWhatsappComposer);
+    whatsappMessage.addEventListener("keydown", event => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        if (!whatsappSubmit.disabled) whatsappForm.requestSubmit();
+      }
+    });
+    document.querySelectorAll(".whatsapp-quick").forEach(button => {
+      button.addEventListener("click", () => {
+        const languageMessages = whatsappMessages[activeLanguage] || whatsappMessages.en;
+        whatsappMessage.value = languageMessages[button.dataset.whatsappMessage] || "";
+        updateWhatsappComposer();
+        whatsappMessage.focus();
+      });
+    });
+    whatsappForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const message = whatsappMessage.value.trim();
+      if (!message) {
+        whatsappStatus.textContent = (whatsappCopy[activeLanguage] || whatsappCopy.en).empty;
+        whatsappMessage.focus();
+        return;
+      }
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      setWhatsappOpen(false, { focus: false });
+    });
+    document.addEventListener("click", event => {
+      if (!whatsappWidget.contains(event.target)) setWhatsappOpen(false, { focus: false });
+    });
+    updateWhatsappComposer();
 
     document.querySelectorAll(".service-toggle").forEach(button => {
       button.addEventListener("click", () => {
@@ -3041,7 +3528,7 @@
         title: "BVLGARI<br><em>Boutique Opening Celebration</em>",
         eyebrow: "Selected Project",
         descriptionKey: "galleryBvlgariDescription",
-        meta: ["2024", "Luxury", "Private Event"],
+        meta: ["2026", "Luxury", "Private Event"],
         images: [
           "https://res.cloudinary.com/dggsmfufq/image/upload/v1783100626/DSC_0001_Large_encocw.jpg",
           "https://res.cloudinary.com/dggsmfufq/image/upload/v1783100625/0361_Large_koeovm.jpg",
@@ -3107,7 +3594,6 @@
         descriptionKey: "galleryLuaCheiaDescription",
         meta: ["Culture", "Community", "Event"],
         images: [
-          "https://res.cloudinary.com/dggsmfufq/image/upload/v1783100564/0015_Large_g9jndk.jpg",
           "https://res.cloudinary.com/dggsmfufq/image/upload/v1783100548/0151_Large_qsc0ca.jpg",
           "https://res.cloudinary.com/dggsmfufq/image/upload/v1783100546/0116_Large_lkh2ra.jpg",
           "https://res.cloudinary.com/dggsmfufq/image/upload/v1783100544/0075_Large_f7znzg.jpg",
@@ -3138,6 +3624,7 @@
     const galleryDescription = document.getElementById("galleryDescription");
     const galleryMeta = document.getElementById("galleryMeta");
     const galleryMainImage = document.getElementById("galleryMainImage");
+    const galleryImageStatus = document.getElementById("galleryImageStatus");
     const galleryImageWrap = document.getElementById("galleryImageWrap");
     const galleryThumbnails = document.getElementById("galleryThumbnails");
     const galleryPrevious = document.getElementById("galleryPrevious");
@@ -3148,21 +3635,48 @@
     let openGalleryId = null;
     let openGalleryImageIndex = 0;
     let galleryTriggerOrigin = null;
+    let galleryImageTimer;
+    let galleryPointerStart = null;
+    const galleryPreloadCache = new Map();
     window.__galleryReady = true;
+
+    function preloadGalleryImage(src) {
+      if (!src || galleryPreloadCache.has(src)) return;
+      const image = new Image();
+      image.decoding = "async";
+      image.src = src;
+      galleryPreloadCache.set(src, image);
+    }
+
+    galleryMainImage.addEventListener("load", () => {
+      galleryImageWrap.classList.remove("is-loading", "is-broken", "is-changing");
+      galleryImageStatus.textContent = "";
+    });
+    galleryMainImage.addEventListener("error", () => {
+      galleryImageWrap.classList.remove("is-loading", "is-changing");
+      galleryImageWrap.classList.add("is-broken");
+      galleryImageStatus.textContent = "Image unavailable";
+    });
 
     function setGalleryImage(index) {
       const gallery = projectGalleries[openGalleryId];
       if (!gallery) return;
       openGalleryImageIndex = (index + gallery.images.length) % gallery.images.length;
+      const nextSrc = gallery.images[openGalleryImageIndex];
+      window.clearTimeout(galleryImageTimer);
       galleryImageWrap.classList.add("is-changing");
-      window.setTimeout(() => {
-        galleryMainImage.src = gallery.images[openGalleryImageIndex];
+      galleryImageWrap.classList.remove("is-broken");
+      galleryImageWrap.classList.add("is-loading");
+      galleryImageStatus.textContent = "Loading image";
+      galleryImageTimer = window.setTimeout(() => {
+        galleryMainImage.src = nextSrc;
         galleryMainImage.alt = `${gallery.title.replace(/<[^>]*>/g, " ").replace(/&amp;/g, "&")} — image ${openGalleryImageIndex + 1}`;
         galleryCurrent.textContent = String(openGalleryImageIndex + 1).padStart(2, "0");
         [...galleryThumbnails.children].forEach((thumb, thumbIndex) => {
           thumb.classList.toggle("active", thumbIndex === openGalleryImageIndex);
         });
-        galleryImageWrap.classList.remove("is-changing");
+        galleryThumbnails.querySelector(".gallery-thumb.active")?.scrollIntoView({ block: "nearest", inline: "center" });
+        if (galleryMainImage.src === nextSrc) galleryImageWrap.classList.remove("is-loading", "is-changing");
       }, 110);
     }
 
@@ -3184,6 +3698,8 @@
       galleryThumbnails.querySelectorAll(".gallery-thumb").forEach(button => {
         button.addEventListener("click", () => setGalleryImage(Number(button.dataset.index)));
       });
+      gallery.images.slice(0, 2).forEach(preloadGalleryImage);
+      preloadGalleryImage(gallery.images[gallery.images.length - 1]);
       setGalleryImage(openGalleryImageIndex);
     }
 
@@ -3197,7 +3713,7 @@
       galleryOverlay.classList.add("open");
       galleryOverlay.setAttribute("aria-hidden", "false");
       updateModalLock();
-      galleryClose.focus();
+      window.setTimeout(() => galleryClose.focus(), 60);
     }
 
     function closeGallery(options = {}) {
@@ -3234,6 +3750,41 @@
     });
     galleryPrevious.addEventListener("click", () => setGalleryImage(openGalleryImageIndex - 1));
     galleryNext.addEventListener("click", () => setGalleryImage(openGalleryImageIndex + 1));
+
+    function finishGallerySwipe(clientX, clientY) {
+      if (!galleryPointerStart) return;
+      const deltaX = clientX - galleryPointerStart.x;
+      const deltaY = clientY - galleryPointerStart.y;
+      const isHorizontalSwipe = Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY) * 1.25;
+      if (isHorizontalSwipe) setGalleryImage(openGalleryImageIndex + (deltaX < 0 ? 1 : -1));
+      galleryPointerStart = null;
+    }
+
+    galleryImageWrap.addEventListener("pointerdown", event => {
+      if (event.target.closest("button")) return;
+      galleryPointerStart = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
+      galleryImageWrap.setPointerCapture?.(event.pointerId);
+    });
+    galleryImageWrap.addEventListener("pointerup", event => {
+      finishGallerySwipe(event.clientX, event.clientY);
+    });
+    galleryImageWrap.addEventListener("pointercancel", () => { galleryPointerStart = null; });
+    galleryImageWrap.addEventListener("mousedown", event => {
+      if (event.target.closest("button")) return;
+      if (!galleryPointerStart) galleryPointerStart = { x: event.clientX, y: event.clientY };
+    });
+    galleryImageWrap.addEventListener("mouseup", event => {
+      finishGallerySwipe(event.clientX, event.clientY);
+    });
+    galleryImageWrap.addEventListener("touchstart", event => {
+      if (event.target.closest("button")) return;
+      const touch = event.changedTouches[0];
+      galleryPointerStart = { x: touch.clientX, y: touch.clientY };
+    }, { passive: true });
+    galleryImageWrap.addEventListener("touchend", event => {
+      const touch = event.changedTouches[0];
+      finishGallerySwipe(touch.clientX, touch.clientY);
+    }, { passive: true });
 
     window.addEventListener("popstate", () => {
       if (privacyOverlay.classList.contains("open")) closePrivacy({ updateHistory: false });
