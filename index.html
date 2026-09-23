@@ -322,13 +322,22 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: var(--tap-size);
-      padding-inline: 8px;
+      min-height: 36px;
+      padding: 0 16px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
       line-height: 1;
       white-space: nowrap;
-      transition: opacity .2s ease;
+      transition: background .2s ease, color .2s ease, border-color .2s ease, opacity .2s ease;
     }
-    .top-contact:hover { opacity: .56; }
+    .top-contact:hover {
+      background: currentColor;
+      color: var(--ink);
+    }
+    .header.scrolled .top-contact:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
     .language {
       position: relative;
       display: inline-flex;
@@ -532,6 +541,62 @@
       line-height: 1.55;
       color: rgba(16,16,15,.73);
     }
+    .menu-events-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin: 20px 0 20px;
+      border-top: 1px solid var(--line-dark);
+      padding-top: 14px;
+    }
+    .menu-event-item {
+      display: grid;
+      grid-template-columns: 24px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 12px;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background .2s ease, color .2s ease, padding-left .2s ease;
+      min-height: 40px;
+      color: inherit;
+    }
+    .menu-event-item:hover,
+    .menu-event-item:focus-visible {
+      background: var(--paper-deep);
+      padding-left: 16px;
+      color: var(--ink);
+    }
+    .menu-event-num {
+      font: 9px/1 var(--mono);
+      letter-spacing: .08em;
+      color: #8c7e6c;
+    }
+    .menu-event-brand {
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: .02em;
+    }
+    .menu-event-sub {
+      font-size: 12px;
+      color: rgba(16,16,15,.64);
+      margin-left: 6px;
+    }
+    .menu-event-action {
+      font: 9px/1 var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: .85;
+      white-space: nowrap;
+    }
+    .menu-event-item:hover .menu-event-action {
+      opacity: 1;
+      color: var(--ink);
+    }
     .menu-info-links {
       display: grid;
       gap: 12px;
@@ -627,6 +692,7 @@
       background-repeat: no-repeat;
       transition: opacity 1.15s ease, transform 6.2s linear;
       will-change: opacity, transform;
+      filter: brightness(.78) contrast(1.04);
     }
     .hero-slide.active {
       opacity: 1;
@@ -642,7 +708,9 @@
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: linear-gradient(180deg, rgba(11,10,8,.24) 0%, rgba(11,10,8,.07) 40%, rgba(11,10,8,.84) 100%);
+      background:
+        radial-gradient(circle at 45% 48%, rgba(16,16,15,.74) 0%, rgba(16,16,15,.52) 48%, rgba(16,16,15,.78) 85%),
+        linear-gradient(180deg, rgba(16,16,15,.82) 0%, rgba(16,16,15,.35) 28%, rgba(16,16,15,.64) 65%, rgba(16,16,15,.96) 100%);
       pointer-events: none;
     }
     .hero-content {
@@ -659,15 +727,17 @@
       letter-spacing: .08em;
       text-transform: uppercase;
       align-self: end;
-      opacity: .8;
+      opacity: .92;
+      text-shadow: 0 2px 10px rgba(0,0,0,.85);
     }
     .hero-title {
       margin: 0;
       font-family: var(--serif);
       font-weight: normal;
       font-size: clamp(76px, 11.3vw, 188px);
-      line-height: .75;
-      letter-spacing: -.073em;
+      line-height: .78;
+      letter-spacing: -.065em;
+      text-shadow: 0 4px 30px rgba(0,0,0,.92), 0 2px 8px rgba(0,0,0,.7);
     }
     .hero-title em { font-style: italic; }
     .hero-copy {
@@ -676,9 +746,13 @@
     }
     .hero-copy p {
       margin: 0 0 20px;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.55;
-      color: rgba(255,255,255,.84);
+      color: rgba(255,255,255,.95);
+      text-shadow: 0 2px 12px rgba(0,0,0,.85);
+    }
+    .hero-copy .button-link {
+      text-shadow: 0 2px 10px rgba(0,0,0,.85);
     }
     .hero-controls {
       position: absolute;
@@ -696,14 +770,16 @@
       height: var(--tap-size);
       display: grid;
       place-items: center;
-      border: 1px solid rgba(255,255,255,.58);
-      background: rgba(16,16,15,.14);
+      border: 1px solid rgba(255,255,255,.45);
+      background: rgba(16,16,15,.35);
+      backdrop-filter: blur(8px);
       color: inherit;
-      transition: background .22s ease, color .22s ease;
+      transition: background .22s ease, color .22s ease, border-color .22s ease;
     }
     .hero-control:hover {
       color: var(--ink);
       background: var(--paper);
+      border-color: var(--paper);
     }
     .hero-counter {
       min-width: 46px;
@@ -712,6 +788,7 @@
       justify-content: center;
       font: 10px/1 var(--mono);
       letter-spacing: .08em;
+      text-shadow: 0 2px 8px rgba(0,0,0,.9);
     }
     .hero-progress {
       position: absolute;
@@ -734,13 +811,31 @@
     .scroll-hint {
       position: absolute;
       z-index: 2;
-      right: 22px;
-      bottom: 23px;
-      writing-mode: vertical-rl;
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%);
       font: 9px/1 var(--mono);
-      letter-spacing: .08em;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.68);
+      color: rgba(255,255,255,.75);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-shadow: 0 2px 8px rgba(0,0,0,.85);
+      pointer-events: none;
+    }
+    .scroll-hint::after {
+      content: "";
+      display: inline-block;
+      width: 1px;
+      height: 14px;
+      background: currentColor;
+      opacity: .6;
+      animation: scrollHintPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollHintPulse {
+      0%, 100% { transform: translateY(0); opacity: .3; }
+      50% { transform: translateY(4px); opacity: .9; }
     }
 
     /* Statement */
@@ -1303,11 +1398,17 @@
     }
     .contact h2 em { color: #c1a47c; font-style: italic; }
     .contact-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 34px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: clamp(34px, 5.5vw, 84px);
       padding-bottom: 112px;
+    }
+    .contact-hero-action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
     }
     .contact-circle {
       width: 154px;
@@ -1324,23 +1425,129 @@
       font: 10px/1.35 var(--mono);
       letter-spacing: .07em;
       text-transform: uppercase;
-      transition: color .25s ease, background .25s ease, transform .25s ease;
+      transition: color .25s ease, background .25s ease, transform .25s ease, border-color .25s ease;
     }
     .contact-circle:hover { color: var(--ink); background: var(--paper); transform: rotate(-8deg); }
-    .contact-details { margin: 0; font-size: 14px; line-height: 1.6; color: rgba(245,241,233,.77); }
-    .contact-details a {
-      color: inherit;
-      border-bottom: 1px solid rgba(245,241,233,.42);
-      transition: color .2s ease, border-color .2s ease;
-    }
-    .contact-details > a {
-      min-height: var(--tap-size);
+    .contact-circle-badge {
       display: inline-flex;
       align-items: center;
+      gap: 8px;
+      font: 9px/1 var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(245,241,233,.72);
     }
-    .contact-details a:hover {
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #1fbd5b;
+      box-shadow: 0 0 0 0 rgba(31, 189, 91, 0.7);
+      animation: pulseGreen 2.2s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(31, 189, 91, 0.7); }
+      70% { box-shadow: 0 0 0 7px rgba(31, 189, 91, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(31, 189, 91, 0); }
+    }
+    .contact-channels {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .channel-card {
+      border: 1px solid rgba(245,241,233,.18);
+      padding: 22px 24px;
+      background: rgba(16,16,15,.35);
+      backdrop-filter: blur(8px);
+      transition: border-color .25s ease, background .25s ease, transform .25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 128px;
+    }
+    .channel-card:hover {
+      border-color: rgba(245,241,233,.55);
+      background: rgba(16,16,15,.62);
+      transform: translateY(-2px);
+    }
+    .channel-card--whatsapp:hover {
+      border-color: rgba(31, 189, 91, 0.6);
+    }
+    .channel-label {
+      font: 9px/1 var(--mono);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #c1a47c;
+      margin-bottom: 12px;
+    }
+    .channel-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 500;
       color: var(--paper);
+      text-decoration: none;
+      transition: color .2s ease, gap .2s ease;
+      min-height: 32px;
+    }
+    .channel-link:hover {
+      color: #fff;
+      gap: 14px;
+    }
+    .channel-link .arrow {
+      background: currentColor;
+    }
+    .channel-link .arrow::after {
       border-color: currentColor;
+    }
+    .channel-note {
+      display: block;
+      font: 10px/1.3 var(--mono);
+      color: rgba(245,241,233,.58);
+      margin-top: 10px;
+      letter-spacing: .03em;
+    }
+    .channel-value-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border: 1px solid rgba(245,241,233,.28);
+      background: transparent;
+      color: rgba(245,241,233,.88);
+      border-radius: 999px;
+      font: 9px/1 var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+      min-height: 28px;
+    }
+    .copy-btn:hover {
+      background: var(--paper);
+      color: var(--ink);
+      border-color: var(--paper);
+    }
+    .copy-btn.copied {
+      background: #1fbd5b;
+      color: #fff;
+      border-color: #1fbd5b;
+    }
+    .copy-feedback {
+      font: 10px/1.2 var(--mono);
+      color: #1fbd5b;
+      min-height: 14px;
+      margin-top: 6px;
+      display: block;
     }
     .footer {
       padding-top: 22px;
@@ -1537,6 +1744,40 @@
       letter-spacing: .06em;
       text-transform: uppercase;
       color: rgba(16,16,15,.52);
+    }
+    .gallery-cta-wrap {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line-dark);
+    }
+    .gallery-inquire-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-height: var(--tap-size);
+      padding: 12px 22px;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+      font: 10px/1 var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background .25s ease, color .25s ease, transform .2s ease, gap .2s ease, border-color .25s ease;
+    }
+    .gallery-inquire-btn:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #fff;
+      gap: 16px;
+      transform: translateY(-1px);
+    }
+    .gallery-inquire-btn .arrow {
+      background: currentColor;
+    }
+    .gallery-inquire-btn .arrow::after {
+      border-color: currentColor;
     }
     .gallery-stage {
       min-width: 0;
@@ -1968,7 +2209,6 @@
     @media (max-width: 960px) {
       :root { --safe-pad: clamp(18px, 4.7vw, 42px); }
       .header-inner { min-height: 68px; }
-      .top-contact { display: none; }
       .menu-shell {
         inset: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
       }
@@ -2017,6 +2257,7 @@
         padding-top: env(safe-area-inset-top);
       }
       .header-right { gap: 8px; }
+      .top-contact { display: none; }
       .language-list {
         right: 0;
         top: calc(100% + 8px);
@@ -2040,6 +2281,21 @@
       }
       .menu-info { padding: 34px max(20px, env(safe-area-inset-right)) max(60px, calc(34px + env(safe-area-inset-bottom))) max(20px, env(safe-area-inset-left)); border-right: 0; border-top: 1px solid var(--line-dark); }
       .menu-info h2 { font-size: clamp(48px, 14.5vw, 58px); line-height: .86; }
+      .menu-events-list { margin: 16px 0; }
+      .menu-event-item {
+        grid-template-columns: 22px 1fr;
+        padding: 10px 4px;
+        border-bottom: 1px solid rgba(16,16,15,.08);
+      }
+      .menu-event-sub {
+        display: block;
+        margin-left: 0;
+        margin-top: 2px;
+      }
+      .menu-event-action {
+        grid-column: 2;
+        margin-top: 4px;
+      }
       .hero {
         min-height: 93svh;
         min-height: 93dvh;
@@ -2102,7 +2358,12 @@
         min-height: 280px;
       }
       .about-gallery figure:first-child { grid-row: auto; }
-      .contact-row { align-items: flex-start; flex-direction: column; padding-bottom: 76px; }
+      .contact-row {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        padding-bottom: 76px;
+      }
+      .contact-hero-action { align-items: flex-start; }
       .contact-circle { width: 136px; height: 136px; }
 
       .project-gallery-badge {
@@ -2336,15 +2597,16 @@
       <div class="menu-body">
         <nav class="menu-primary" aria-label="Website menu">
           <button class="menu-item active" data-panel="studio" data-target="#home" data-i18n="menuStudio">Studio Co Labs</button>
+          <button class="menu-item" data-panel="work" data-target="#work" data-i18n="menuWork">Selected Work</button>
           <button class="menu-item" data-panel="services" data-target="#services" data-i18n="menuServices">Services</button>
           <button class="menu-item" data-panel="clients" data-target="#clients" data-i18n="menuClients">Clients</button>
           <button class="menu-item" data-panel="about" data-target="#about" data-i18n="menuAbout">About Us</button>
           <button class="menu-item" data-panel="contact" data-target="#contact" data-i18n="menuContact">Contact</button>
 
           <div class="menu-subnav">
+            <a href="#work"><span data-i18n="menuSubProjects">All Projects & Activations</span><span>↗</span></a>
             <a href="#services"><span data-i18n="menuSub1">Strategic Collaborations</span><span>↗</span></a>
-            <a href="#services"><span data-i18n="menuSub2">Creative Direction & Production</span><span>↗</span></a>
-            <a href="#work"><span data-i18n="menuSub3">Selected Work</span><span>↗</span></a>
+            <a href="#contact"><span data-i18n="navContact">Contact</span><span>↗</span></a>
           </div>
         </nav>
 
@@ -2352,6 +2614,48 @@
           <div class="eyebrow" id="menuInfoEyebrow">Studio Co Labs</div>
           <h2 id="menuInfoTitle">We are not an <em>event company.</em></h2>
           <p id="menuInfoText">We are a strategic creative studio and PR partner for luxury brands.</p>
+          <div class="menu-events-list" id="menuEventsList" style="display: none;" role="list" aria-label="Events and galleries">
+            <button class="menu-event-item" type="button" data-gallery="bvlgari" data-image="https://res.cloudinary.com/dggsmfufq/image/upload/v1783100618/0285_1_Large_l2t97k.jpg" data-title="BVLGARI — Boutique Opening Celebration">
+              <span class="menu-event-num">01</span>
+              <div>
+                <span class="menu-event-brand">BVLGARI</span>
+                <span class="menu-event-sub" data-i18n="menuEventBvlgari">Boutique Opening Celebration</span>
+              </div>
+              <span class="menu-event-action" data-i18n="viewGallery">View Gallery ↗</span>
+            </button>
+            <button class="menu-event-item" type="button" data-gallery="zegna" data-image="https://res.cloudinary.com/dggsmfufq/image/upload/v1783100489/_DSC0432_Large_h1w32g.jpg" data-title="ZEGNA — Private Client Experience">
+              <span class="menu-event-num">02</span>
+              <div>
+                <span class="menu-event-brand">ZEGNA</span>
+                <span class="menu-event-sub" data-i18n="menuEventZegna">Private Client Experience</span>
+              </div>
+              <span class="menu-event-action" data-i18n="viewGallery">View Gallery ↗</span>
+            </button>
+            <button class="menu-event-item" type="button" data-gallery="tiffany-lock" data-image="https://res.cloudinary.com/dggsmfufq/image/upload/v1783100851/TIFFANY_EVENTO_80_Large_wanflp.jpg" data-title="TIFFANY &amp; CO. — LOCK">
+              <span class="menu-event-num">03</span>
+              <div>
+                <span class="menu-event-brand">TIFFANY &amp; CO.</span>
+                <span class="menu-event-sub" data-i18n="menuEventTiffanyLock">LOCK Launch Experience</span>
+              </div>
+              <span class="menu-event-action" data-i18n="viewGallery">View Gallery ↗</span>
+            </button>
+            <button class="menu-event-item" type="button" data-gallery="lua-cheia" data-image="https://res.cloudinary.com/dggsmfufq/image/upload/v1783100541/0056_Large_yrsneu.jpg" data-title="LUA CHEIA — An Evening in Motion">
+              <span class="menu-event-num">04</span>
+              <div>
+                <span class="menu-event-brand">LUA CHEIA</span>
+                <span class="menu-event-sub" data-i18n="menuEventLuaCheia">An Evening in Motion</span>
+              </div>
+              <span class="menu-event-action" data-i18n="viewGallery">View Gallery ↗</span>
+            </button>
+            <button class="menu-event-item" type="button" data-gallery="tiffany-holidays" data-image="https://res.cloudinary.com/dggsmfufq/image/upload/v1783100505/Tiffany-60_Large_gatlro.jpg" data-title="TIFFANY &amp; CO. — Holiday Moment">
+              <span class="menu-event-num">05</span>
+              <div>
+                <span class="menu-event-brand">TIFFANY &amp; CO.</span>
+                <span class="menu-event-sub" data-i18n="menuEventTiffanyHolidays">Holiday Moment</span>
+              </div>
+              <span class="menu-event-action" data-i18n="viewGallery">View Gallery ↗</span>
+            </button>
+          </div>
           <div class="menu-info-links">
             <a href="#home" id="menuInfoLink">Explore Studio Co Labs</a>
           </div>
@@ -2629,12 +2933,52 @@
         <h2 id="contactTitle" data-i18n-html="contactTitle">A good story<br>deserves a <em>moment.</em></h2>
 
         <div class="contact-row">
-          <button class="contact-circle" id="contactWhatsappOpen" type="button" aria-controls="whatsappPanel" aria-expanded="false" data-i18n-html="contactCta">Start a<br>conversation</button>
-          <p class="contact-details">
-            Panama City<br><br>
-            <a href="mailto:Contact@studiocolabs.com">Contact@studiocolabs.com</a><br>
-            <a href="tel:+50769604183">+507 6960-4183</a>
-          </p>
+          <div class="contact-hero-action">
+            <button class="contact-circle" id="contactWhatsappOpen" type="button" aria-controls="whatsappPanel" aria-expanded="false" data-analytics-channel="whatsapp" data-analytics-location="contact_circle">
+              <span data-i18n-html="contactCta">Start a<br>conversation</span>
+            </button>
+            <div class="contact-circle-badge">
+              <span class="pulse-dot" aria-hidden="true"></span>
+              <span data-i18n="contactStatus">Direct · Fast Response</span>
+            </div>
+          </div>
+
+          <div class="contact-channels" aria-label="Direct contact channels">
+            <!-- Channel 1: WhatsApp -->
+            <div class="channel-card channel-card--whatsapp">
+              <div class="channel-label" data-i18n="channelWhatsappLabel">Instant Inquiry</div>
+              <a class="channel-value channel-link" id="contactSectionWhatsapp" href="https://wa.me/50769604183?text=Hi%20Studio%20Co%20Labs!%20I%27d%20love%20to%20learn%20more%20about%20your%20services." target="_blank" rel="noopener" data-analytics-channel="whatsapp" data-analytics-location="contact_section">
+                <span>WhatsApp Business</span>
+                <span class="arrow" aria-hidden="true"></span>
+              </a>
+              <span class="channel-note" data-i18n="channelWhatsappNote">+507 6960-4183 · WhatsApp Business</span>
+            </div>
+
+            <!-- Channel 2: Email -->
+            <div class="channel-card channel-card--email">
+              <div class="channel-label" data-i18n="channelEmailLabel">RFPs, Briefs & Proposals</div>
+              <div class="channel-value-row">
+                <a class="channel-value channel-link" id="contactSectionEmail" href="mailto:Contact@studiocolabs.com" data-analytics-channel="email" data-analytics-location="contact_section">
+                  <span>Contact@studiocolabs.com</span>
+                </a>
+                <button class="copy-btn" id="copyEmailBtn" type="button" aria-label="Copy email address" data-copy="Contact@studiocolabs.com" data-analytics-action="email_copy">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span class="copy-text" data-i18n="copyText">Copy</span>
+                </button>
+              </div>
+              <span class="copy-feedback" id="copyFeedback" role="status" aria-live="polite"></span>
+            </div>
+
+            <!-- Channel 3: Telephone -->
+            <div class="channel-card channel-card--phone">
+              <div class="channel-label" data-i18n="channelPhoneLabel">Direct Line</div>
+              <a class="channel-value channel-link" id="contactSectionPhone" href="tel:+50769604183" data-analytics-channel="phone" data-analytics-location="contact_section">
+                <span>+507 6960-4183</span>
+                <span class="arrow" aria-hidden="true"></span>
+              </a>
+              <span class="channel-note" data-i18n="channelPhoneNote">Panama City · Office GMT-5</span>
+            </div>
+          </div>
         </div>
 
         <footer class="footer">
@@ -2690,6 +3034,12 @@
           <p class="gallery-description" id="galleryDescription"></p>
           <div class="gallery-meta" id="galleryMeta"></div>
           <p class="gallery-note" data-i18n="galleryNote">Selected photography from the Studio Co Labs archive.</p>
+          <div class="gallery-cta-wrap">
+            <button class="gallery-inquire-btn" id="galleryInquireBtn" type="button" data-analytics-action="gallery_inquire">
+              <span data-i18n="galleryInquire">Inquire about this project</span>
+              <span class="arrow" aria-hidden="true"></span>
+            </button>
+          </div>
         </aside>
 
         <div class="gallery-stage">
@@ -2732,7 +3082,7 @@
         <textarea class="whatsapp-message" id="whatsappMessage" name="message" maxlength="500" placeholder="Write a message…" data-whatsapp-copy-placeholder="placeholder"></textarea>
         <div class="whatsapp-form-bottom">
           <span class="whatsapp-count" id="whatsappCount">0 / 500</span>
-          <button class="whatsapp-submit" id="whatsappSubmit" type="submit" disabled>
+          <button class="whatsapp-submit" id="whatsappSubmit" type="submit">
             <span data-whatsapp-copy="send">Continue in WhatsApp</span><span aria-hidden="true">↗</span>
           </button>
         </div>
@@ -2763,6 +3113,7 @@
         contactEyebrow:"Let's work together", contactTitle:"A good story<br>deserves a <em>moment.</em>", contactCta:"Start a<br>conversation", footerInstagram:"Instagram", footerLinkedIn:"LinkedIn", footerPrivacy:"Privacy",
         menuData:{
           studio:{eyebrow:"Studio Co Labs", title:"We are not an <em>event company.</em>", text:"We are a strategic creative studio and PR partner for luxury brands.", link:"Explore Studio Co Labs", target:"#home", preview:"Strategy. Experience. Impact."},
+          work:{eyebrow:"Selected Work", title:"Experiences people choose<br>to <em>remember.</em>", text:"Explore our archive of luxury brand activations, private client experiences and cultural gatherings.", link:"All Projects & Activations", target:"#work", preview:"Selected Work Archive"},
           services:{eyebrow:"Services", title:"Ideas designed to <em>be remembered.</em>", text:"We build strategic collaborations, creative direction and production around experiences that create real relevance.", link:"Explore services", target:"#services", preview:"Strategic collaborations."},
           clients:{eyebrow:"Clients", title:"Brands with a <em>point of view.</em>", text:"Across luxury, culture and hospitality, we collaborate with brands that understand the value of thoughtful presence.", link:"Meet our clients", target:"#clients", preview:"Selected relationships."},
           about:{eyebrow:"About Us", title:"We believe in <em>creating relevance.</em>", text:"Strategy, culture, design and human connection come together to build brands people genuinely remember.", link:"Discover our approach", target:"#about", preview:"The Studio Co Labs approach."},
@@ -2783,6 +3134,7 @@
         contactEyebrow:"Trabajemos juntos", contactTitle:"Una buena historia<br>merece un <em>momento.</em>", contactCta:"Iniciemos una<br>conversación", footerInstagram:"Instagram", footerLinkedIn:"LinkedIn", footerPrivacy:"Privacidad",
         menuData:{
           studio:{eyebrow:"Studio Co Labs", title:"No somos una <em>empresa de eventos.</em>", text:"Somos un estudio creativo estratégico y socio de PR para marcas de lujo.", link:"Explorar Studio Co Labs", target:"#home", preview:"Estrategia. Experiencia. Impacto."},
+          work:{eyebrow:"Proyectos Seleccionados", title:"Experiencias que las personas<br>eligen <em>recordar.</em>", text:"Explora nuestro archivo de activaciones de marcas de lujo, experiencias privadas y encuentros culturales.", link:"Todos los proyectos y activaciones", target:"#work", preview:"Archivo de Proyectos"},
           services:{eyebrow:"Servicios", title:"Ideas diseñadas para <em>ser recordadas.</em>", text:"Construimos colaboraciones estratégicas, dirección creativa y producción alrededor de experiencias que crean relevancia real.", link:"Explorar servicios", target:"#services", preview:"Colaboraciones estratégicas."},
           clients:{eyebrow:"Clientes", title:"Marcas con un <em>punto de vista.</em>", text:"En lujo, cultura y hospitalidad, colaboramos con marcas que comprenden el valor de una presencia consciente.", link:"Conocer clientes", target:"#clients", preview:"Relaciones seleccionadas."},
           about:{eyebrow:"Nosotros", title:"Creemos en <em>crear relevancia.</em>", text:"Estrategia, cultura, diseño y conexión humana se unen para construir marcas que las personas recuerdan.", link:"Descubrir nuestro enfoque", target:"#about", preview:"El enfoque Studio Co Labs."},
@@ -2936,11 +3288,150 @@
 
     Object.entries(extraProjectCopy).forEach(([language, copy]) => Object.assign(texts[language], copy));
 
+    const conversionInterfaceCopy = {
+      en: {
+        galleryInquire: "Inquire about this project",
+        contactStatus: "Direct · Fast Response",
+        channelWhatsappLabel: "Instant Inquiry",
+        channelWhatsappNote: "+507 6960-4183 · WhatsApp Business",
+        channelEmailLabel: "RFPs, Briefs & Proposals",
+        copyText: "Copy",
+        emailCopied: "Email copied to clipboard",
+        channelPhoneLabel: "Direct Line",
+        channelPhoneNote: "Panama City · Office GMT-5",
+        galleryProjectInquiry: "Hi Studio Co Labs! I was exploring the {project} project and would like to discuss a collaboration."
+      },
+      es: {
+        galleryInquire: "Consultar sobre este proyecto",
+        contactStatus: "Directo · Respuesta rápida",
+        channelWhatsappLabel: "Consulta Inmediata",
+        channelWhatsappNote: "+507 6960-4183 · WhatsApp Business",
+        channelEmailLabel: "RFPs, Briefs y Propuestas",
+        copyText: "Copiar",
+        emailCopied: "Correo copiado al portapapeles",
+        channelPhoneLabel: "Línea Directa",
+        channelPhoneNote: "Ciudad de Panamá · Oficina GMT-5",
+        galleryProjectInquiry: "Hola Studio Co Labs. Estuve viendo el proyecto {project} y me gustaría consultar sobre una colaboración."
+      },
+      fr: {
+        galleryInquire: "Consulter pour un projet similaire",
+        contactStatus: "Direct · Réponse rapide",
+        channelWhatsappLabel: "Échange Immédiat",
+        channelWhatsappNote: "+507 6960-4183 · WhatsApp Business",
+        channelEmailLabel: "Appels d'offres & Briefs",
+        copyText: "Copier",
+        emailCopied: "E-mail copié dans le presse-papiers",
+        channelPhoneLabel: "Ligne Directe",
+        channelPhoneNote: "Panama City · Bureau GMT-5",
+        galleryProjectInquiry: "Bonjour Studio Co Labs ! J'ai découvert le projet {project} et j'aimerais échanger sur une collaboration."
+      },
+      de: {
+        galleryInquire: "Projekt anfragen",
+        contactStatus: "Direkt · Schnelle Antwort",
+        channelWhatsappLabel: "Sofortige Anfrage",
+        channelWhatsappNote: "+507 6960-4183 · WhatsApp Business",
+        channelEmailLabel: "RFPs, Briefs & Angebote",
+        copyText: "Kopieren",
+        emailCopied: "E-Mail in die Zwischenablage kopiert",
+        channelPhoneLabel: "Direktleitung",
+        channelPhoneNote: "Panama-Stadt · Büro GMT-5",
+        galleryProjectInquiry: "Hallo Studio Co Labs! Ich habe das Projekt {project} gesehen und würde gern über eine Zusammenarbeit sprechen."
+      },
+      it: {
+        galleryInquire: "Richiedi un progetto simile",
+        contactStatus: "Diretto · Risposta rapida",
+        channelWhatsappLabel: "Richiesta Immediata",
+        channelWhatsappNote: "+507 6960-4183 · WhatsApp Business",
+        channelEmailLabel: "RFP, Brief e Proposte",
+        copyText: "Copia",
+        emailCopied: "E-mail copiata negli appunti",
+        channelPhoneLabel: "Linea Diretta",
+        channelPhoneNote: "Città di Panama · Ufficio GMT-5",
+        galleryProjectInquiry: "Ciao Studio Co Labs! Ho visto il progetto {project} e vorrei parlare di una collaborazione."
+      },
+      pt: {
+        galleryInquire: "Consultar sobre este projeto",
+        contactStatus: "Direto · Resposta rápida",
+        channelWhatsappLabel: "Consulta Imediata",
+        channelWhatsappNote: "+507 6960-4183 · WhatsApp Business",
+        channelEmailLabel: "RFPs, Briefs e Propostas",
+        copyText: "Copiar",
+        emailCopied: "E-mail copiado para a área de transferência",
+        channelPhoneLabel: "Linha Direta",
+        channelPhoneNote: "Cidade do Panamá · Escritório GMT-5",
+        galleryProjectInquiry: "Olá Studio Co Labs! Vi o projeto {project} e gostaria de conversar sobre uma colaboração."
+      }
+    };
+    Object.entries(conversionInterfaceCopy).forEach(([language, copy]) => Object.assign(texts[language], copy));
+
+    const menuEventsInterfaceCopy = {
+      en: {
+        menuWork: "Selected Work",
+        menuSubProjects: "All Projects & Activations",
+        menuEventBvlgari: "Boutique Opening Celebration",
+        menuEventZegna: "Private Client Experience",
+        menuEventTiffanyLock: "LOCK Launch Experience",
+        menuEventLuaCheia: "An Evening in Motion",
+        menuEventTiffanyHolidays: "Holiday Moment"
+      },
+      es: {
+        menuWork: "Proyectos Seleccionados",
+        menuSubProjects: "Todos los Proyectos y Activaciones",
+        menuEventBvlgari: "Celebración de Apertura de Boutique",
+        menuEventZegna: "Experiencia para Clientes Privados",
+        menuEventTiffanyLock: "Experiencia de Lanzamiento LOCK",
+        menuEventLuaCheia: "Una Noche en Movimiento",
+        menuEventTiffanyHolidays: "Momento Navideño"
+      },
+      fr: {
+        menuWork: "Projets Sélectionnés",
+        menuSubProjects: "Tous les Projets & Événements",
+        menuEventBvlgari: "Célébration d'Inauguration",
+        menuEventZegna: "Expérience Clientèle Privée",
+        menuEventTiffanyLock: "Expérience de Lancement LOCK",
+        menuEventLuaCheia: "Une Soirée en Mouvement",
+        menuEventTiffanyHolidays: "Moment des Fêtes"
+      },
+      de: {
+        menuWork: "Ausgewählte Projekte",
+        menuSubProjects: "Alle Projekte & Aktivierungen",
+        menuEventBvlgari: "Boutique-Eröffnungsfeier",
+        menuEventZegna: "Privatkunden-Erlebnis",
+        menuEventTiffanyLock: "LOCK Launch-Erlebnis",
+        menuEventLuaCheia: "Ein Abend in Bewegung",
+        menuEventTiffanyHolidays: "Feiertagsmoment"
+      },
+      it: {
+        menuWork: "Progetti Selezionati",
+        menuSubProjects: "Tutti i Progetti & Attivazioni",
+        menuEventBvlgari: "Apertura Boutique",
+        menuEventZegna: "Esperienza Clienti Privati",
+        menuEventTiffanyLock: "Esperienza di Lancio LOCK",
+        menuEventLuaCheia: "Una Serata in Movimento",
+        menuEventTiffanyHolidays: "Momento Festivo"
+      },
+      pt: {
+        menuWork: "Projetos Selecionados",
+        menuSubProjects: "Todos os Projetos e Ativações",
+        menuEventBvlgari: "Abertura de Boutique",
+        menuEventZegna: "Experiência para Clientes Privados",
+        menuEventTiffanyLock: "Experiência de Lançamento LOCK",
+        menuEventLuaCheia: "Uma Noite em Movimento",
+        menuEventTiffanyHolidays: "Momento de Fim de Ano"
+      }
+    };
+    Object.entries(menuEventsInterfaceCopy).forEach(([language, copy]) => Object.assign(texts[language], copy));
+
     const menuPanelImages = {
       studio: {
         src: "https://res.cloudinary.com/dggsmfufq/image/upload/v1783100851/TIFFANY_EVENTO_80_Large_wanflp.jpg",
         position: "56% center",
         alt: "Studio Co Labs luxury brand experience"
+      },
+      work: {
+        src: "https://res.cloudinary.com/dggsmfufq/image/upload/v1783100618/0285_1_Large_l2t97k.jpg",
+        position: "50% center",
+        alt: "Selected Work by Studio Co Labs"
       },
       services: {
         src: "https://res.cloudinary.com/dggsmfufq/image/upload/v1783100585/0254_Large_mcqcoi.jpg",
@@ -2975,6 +3466,14 @@
           link: t.heroButton,
           target: "#home",
           preview: t.strategyTitle.replace(/<[^>]*>/g, " ")
+        },
+        work: {
+          eyebrow: t.workEyebrow,
+          title: t.workTitle,
+          text: t.workIntro,
+          link: t.menuSubProjects || "All Projects",
+          target: "#work",
+          preview: t.workEyebrow
         },
         services: {
           eyebrow: t.servicesEyebrow,
@@ -3025,6 +3524,7 @@
     const menuInfoTitle = document.getElementById("menuInfoTitle");
     const menuInfoText = document.getElementById("menuInfoText");
     const menuInfoLink = document.getElementById("menuInfoLink");
+    const menuEventsList = document.getElementById("menuEventsList");
     const menuPreviewImage = document.getElementById("menuPreviewImage");
     const menuPreviewEyebrow = document.getElementById("menuPreviewEyebrow");
     const menuPreviewTitle = document.getElementById("menuPreviewTitle");
@@ -3039,6 +3539,43 @@
     let menuPanelTimer;
     let menuTriggerOrigin = null;
     const modalHistoryKey = "studioCoLabsModal";
+
+    function trackConversion(eventName, params = {}) {
+      const payload = {
+        ...params,
+        language: activeLanguage,
+        page_location: window.location.href,
+        page_title: document.title,
+        viewport_size: `${window.innerWidth}x${window.innerHeight}`,
+        device_category: window.innerWidth <= 640 ? "mobile" : (window.innerWidth <= 1024 ? "tablet" : "desktop"),
+        timestamp: new Date().toISOString()
+      };
+
+      if (typeof window.gtag === "function") {
+        window.gtag("event", eventName, payload);
+        if (["contact_click", "whatsapp_chat_start", "gallery_inquire", "email_copied"].includes(eventName)) {
+          window.gtag("event", "generate_lead", {
+            lead_channel: payload.channel || (eventName === "email_copied" ? "email" : "whatsapp"),
+            lead_source: payload.location || payload.source || "website",
+            ...payload
+          });
+        }
+      }
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: eventName,
+        ...payload
+      });
+
+      window.dispatchEvent(new CustomEvent("studio_analytics", {
+        detail: { event: eventName, ...payload }
+      }));
+
+      if (window.location.search.includes("analytics_debug=true") || window.location.hostname === "localhost") {
+        console.log(`[Studio Analytics] ${eventName}:`, payload);
+      }
+    }
     const whatsappNumber = "50769604183";
     const whatsappWidget = document.getElementById("whatsappWidget");
     const whatsappPanel = document.getElementById("whatsappPanel");
@@ -3118,7 +3655,7 @@
     function updateWhatsappComposer() {
       const length = whatsappMessage.value.length;
       whatsappCount.textContent = `${length} / 500`;
-      whatsappSubmit.disabled = !whatsappMessage.value.trim();
+      whatsappSubmit.disabled = false;
       if (whatsappMessage.value.trim()) whatsappStatus.textContent = "";
     }
 
@@ -3211,6 +3748,15 @@
       menuInfoText.textContent = data.text;
       menuInfoLink.textContent = data.link;
       menuInfoLink.href = data.target;
+
+      if (panel === "work" && menuEventsList) {
+        menuEventsList.style.display = "flex";
+        menuInfoText.style.display = "none";
+      } else {
+        if (menuEventsList) menuEventsList.style.display = "none";
+        menuInfoText.style.display = "";
+      }
+
       const image = menuPanelImages[panel] || menuPanelImages.studio;
       if (menuPreviewImage.src !== image.src) menuPreviewImage.src = image.src;
       menuPreviewImage.alt = image.alt;
@@ -3246,6 +3792,7 @@
     }
 
     function openPrivacy() {
+      trackConversion("privacy_view", { location: "footer" });
       pushModalHistory("privacy");
       privacyOverlay.classList.add("open");
       privacyOverlay.setAttribute("aria-hidden", "false");
@@ -3259,14 +3806,27 @@
         window.history.back();
         return;
       }
+      trackConversion("privacy_close", { location: "privacy_modal" });
       privacyOverlay.classList.remove("open");
       privacyOverlay.setAttribute("aria-hidden", "true");
       clearModalHistory("privacy");
       updateModalLock();
     }
 
-    menuOpen.addEventListener("click", () => setMenu(true));
-    menuClose.addEventListener("click", () => setMenu(false));
+    menuOpen.addEventListener("click", () => {
+      trackConversion("navigation_click", {
+        nav_type: "menu_open",
+        location: "header"
+      });
+      setMenu(true);
+    });
+    menuClose.addEventListener("click", () => {
+      trackConversion("navigation_click", {
+        nav_type: "menu_close",
+        location: "menu_top"
+      });
+      setMenu(false);
+    });
     menuOverlay.addEventListener("click", event => {
       if (event.target === menuOverlay) setMenu(false);
     });
@@ -3292,11 +3852,21 @@
 
     topContact?.addEventListener("click", event => {
       event.preventDefault();
+      trackConversion("contact_click", {
+        channel: "navigation",
+        location: "header"
+      });
       scrollToContact();
     });
 
     function navigateMenuItem(button) {
       const target = document.querySelector(button.dataset.target);
+      trackConversion("navigation_click", {
+        nav_type: "menu_item",
+        location: "menu_primary",
+        target_section: button.dataset.target,
+        link_text: button.textContent.trim()
+      });
       setMenu(false, { updateHistory: false });
       if (!target) return;
       target.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -3309,8 +3879,73 @@
       button.addEventListener("click", () => navigateMenuItem(button));
     });
 
-    menuInfoLink.addEventListener("click", () => setMenu(false, { updateHistory: false }));
-    document.querySelectorAll(".menu-subnav a").forEach(link => link.addEventListener("click", () => setMenu(false, { updateHistory: false })));
+    menuInfoLink.addEventListener("click", () => {
+      trackConversion("navigation_click", {
+        nav_type: "menu_info_link",
+        location: "menu_info",
+        target_section: menuInfoLink.getAttribute("href"),
+        link_text: menuInfoLink.textContent.trim()
+      });
+      setMenu(false, { updateHistory: false });
+    });
+    document.querySelectorAll(".menu-subnav a").forEach(link => link.addEventListener("click", () => {
+      trackConversion("navigation_click", {
+        nav_type: "menu_subnav",
+        location: "menu_overlay",
+        target_section: link.getAttribute("href"),
+        link_text: link.textContent.trim()
+      });
+      setMenu(false, { updateHistory: false });
+    }));
+
+    const menuEventItems = document.querySelectorAll(".menu-event-item");
+    menuEventItems.forEach(item => {
+      const updatePreview = () => {
+        const imageSrc = item.dataset.image;
+        const brand = item.querySelector(".menu-event-brand")?.textContent?.trim() || "";
+        const sub = item.querySelector(".menu-event-sub")?.textContent?.trim() || "";
+        if (imageSrc) {
+          menuPreviewImage.src = imageSrc;
+          menuPreviewImage.alt = `${brand} — ${sub}`;
+          menuPreviewImage.style.objectPosition = "50% center";
+        }
+        if (brand) menuPreviewEyebrow.textContent = brand;
+        if (sub) menuPreviewTitle.textContent = sub;
+      };
+
+      item.addEventListener("pointerenter", updatePreview);
+      item.addEventListener("focus", updatePreview);
+
+      item.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        const galleryId = item.dataset.gallery;
+        setMenu(false, { updateHistory: false });
+        trackConversion("menu_event_click", {
+          project_name: galleryId,
+          location: "menu_events_list"
+        });
+        if (typeof openGallery === "function" && galleryId) {
+          openGallery(galleryId, item);
+        }
+      });
+    });
+
+    menuEventsList?.addEventListener("pointerleave", () => {
+      if (activeMenuPanel === "work") {
+        const workData = texts[activeLanguage]?.menuData?.work || texts.en.menuData.work;
+        const image = menuPanelImages.work;
+        if (image) {
+          menuPreviewImage.src = image.src;
+          menuPreviewImage.alt = image.alt;
+          menuPreviewImage.style.objectPosition = image.position;
+        }
+        if (workData) {
+          menuPreviewEyebrow.textContent = workData.eyebrow;
+          menuPreviewTitle.textContent = workData.preview;
+        }
+      }
+    });
 
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
@@ -3374,7 +4009,8 @@
       }
     });
 
-    function setLanguage(language) {
+    function setLanguage(language, method = "user_choice") {
+      const prevLang = activeLanguage;
       const content = texts[language] || texts.en;
       activeLanguage = language;
       document.documentElement.lang = language;
@@ -3400,19 +4036,47 @@
       localStorage.setItem("studioCoLabsLanguage", language);
       langWrap.classList.remove("open");
       langTrigger.setAttribute("aria-expanded", "false");
+
+      if (prevLang && prevLang !== language && method !== "initial") {
+        trackConversion("language_change", {
+          from_language: prevLang,
+          to_language: language,
+          method: method
+        });
+      }
     }
 
     document.querySelectorAll(".language-option").forEach(button => {
-      button.addEventListener("click", () => setLanguage(button.dataset.lang));
+      button.addEventListener("click", () => setLanguage(button.dataset.lang, "dropdown_click"));
     });
 
-    // English is explicitly the default language.
+    // Language detection: checks localStorage first, then browser language, fallback to 'en'.
     const savedLanguage = localStorage.getItem("studioCoLabsLanguage");
-    setLanguage(savedLanguage && texts[savedLanguage] ? savedLanguage : "en");
+    let initialLang = "en";
+    if (savedLanguage && texts[savedLanguage]) {
+      initialLang = savedLanguage;
+    } else {
+      const browserLang = (navigator.language || navigator.userLanguage || "en").slice(0, 2).toLowerCase();
+      if (texts[browserLang]) initialLang = browserLang;
+    }
+    setLanguage(initialLang, "initial");
 
-    whatsappOpen.addEventListener("click", () => setWhatsappOpen(!whatsappWidget.classList.contains("is-open")));
+    whatsappOpen.addEventListener("click", () => {
+      const willOpen = !whatsappWidget.classList.contains("is-open");
+      if (willOpen) {
+        trackConversion("contact_click", {
+          channel: "whatsapp_widget",
+          location: "floating_button"
+        });
+      }
+      setWhatsappOpen(willOpen);
+    });
     contactWhatsappOpen.addEventListener("click", event => {
       event.stopPropagation();
+      trackConversion("contact_click", {
+        channel: "whatsapp_widget",
+        location: "contact_circle"
+      });
       setWhatsappOpen(true);
     });
     whatsappClose.addEventListener("click", () => setWhatsappOpen(false));
@@ -3420,25 +4084,34 @@
     whatsappMessage.addEventListener("keydown", event => {
       if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault();
-        if (!whatsappSubmit.disabled) whatsappForm.requestSubmit();
+        whatsappForm.requestSubmit();
       }
     });
     document.querySelectorAll(".whatsapp-quick").forEach(button => {
       button.addEventListener("click", () => {
+        const topic = button.dataset.whatsappMessage;
         const languageMessages = whatsappMessages[activeLanguage] || whatsappMessages.en;
-        whatsappMessage.value = languageMessages[button.dataset.whatsappMessage] || "";
+        whatsappMessage.value = languageMessages[topic] || "";
         updateWhatsappComposer();
+        trackConversion("whatsapp_intent_start", {
+          source: "quick_chip",
+          topic: topic
+        });
         whatsappMessage.focus();
       });
     });
     whatsappForm.addEventListener("submit", event => {
       event.preventDefault();
-      const message = whatsappMessage.value.trim();
+      let message = whatsappMessage.value.trim();
+      const languageMessages = whatsappMessages[activeLanguage] || whatsappMessages.en;
       if (!message) {
-        whatsappStatus.textContent = (whatsappCopy[activeLanguage] || whatsappCopy.en).empty;
-        whatsappMessage.focus();
-        return;
+        message = languageMessages.project || "Hi Studio Co Labs! I’d love to talk about a project.";
       }
+      trackConversion("whatsapp_chat_start", {
+        source: "widget_form",
+        has_custom_text: Boolean(whatsappMessage.value.trim()),
+        message_length: message.length
+      });
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, "_blank", "noopener,noreferrer");
       setWhatsappOpen(false, { focus: false });
@@ -3447,6 +4120,58 @@
       if (!whatsappWidget.contains(event.target)) setWhatsappOpen(false, { focus: false });
     });
     updateWhatsappComposer();
+
+    // Contact Section Direct Channel Listeners & Email Copy
+    const copyEmailBtn = document.getElementById("copyEmailBtn");
+    const copyFeedback = document.getElementById("copyFeedback");
+    let copyFeedbackTimer;
+
+    copyEmailBtn?.addEventListener("click", async () => {
+      const email = copyEmailBtn.dataset.copy || "Contact@studiocolabs.com";
+      const t = texts[activeLanguage] || texts.en;
+      try {
+        await navigator.clipboard.writeText(email);
+      } catch (e) {
+        const tempInput = document.createElement("input");
+        tempInput.value = email;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+      }
+      copyEmailBtn.classList.add("copied");
+      copyFeedback.textContent = t.emailCopied || "Email copied to clipboard";
+      trackConversion("email_copied", {
+        email_address: email,
+        location: "contact_section"
+      });
+      window.clearTimeout(copyFeedbackTimer);
+      copyFeedbackTimer = window.setTimeout(() => {
+        copyEmailBtn.classList.remove("copied");
+        copyFeedback.textContent = "";
+      }, 3500);
+    });
+
+    document.getElementById("contactSectionWhatsapp")?.addEventListener("click", () => {
+      trackConversion("contact_click", {
+        channel: "whatsapp",
+        location: "contact_section"
+      });
+    });
+
+    document.getElementById("contactSectionEmail")?.addEventListener("click", () => {
+      trackConversion("contact_click", {
+        channel: "email",
+        location: "contact_section"
+      });
+    });
+
+    document.getElementById("contactSectionPhone")?.addEventListener("click", () => {
+      trackConversion("contact_click", {
+        channel: "phone",
+        location: "contact_section"
+      });
+    });
 
     document.querySelectorAll(".service-toggle").forEach(button => {
       button.addEventListener("click", () => {
@@ -3459,6 +4184,10 @@
         if (!wasOpen) {
           entry.classList.add("open");
           button.setAttribute("aria-expanded", "true");
+          const serviceName = entry.querySelector(".service-name")?.textContent?.trim() || "";
+          trackConversion("service_expand", {
+            service_name: serviceName
+          });
         }
       });
     });
@@ -3504,11 +4233,19 @@
     heroPrevious.addEventListener("click", () => {
       renderHeroSlide(activeSlide - 1);
       restartHeroSlider();
+      trackConversion("hero_slider_interaction", {
+        direction: "prev",
+        slide_index: activeSlide + 1
+      });
     });
 
     heroNext.addEventListener("click", () => {
       renderHeroSlide(activeSlide + 1);
       restartHeroSlider();
+      trackConversion("hero_slider_interaction", {
+        direction: "next",
+        slide_index: activeSlide + 1
+      });
     });
 
     hero.addEventListener("mouseenter", () => window.clearInterval(heroInterval));
@@ -3658,10 +4395,18 @@
       galleryImageStatus.textContent = "Image unavailable";
     });
 
-    function setGalleryImage(index) {
+    function setGalleryImage(index, method = "arrow_click") {
       const gallery = projectGalleries[openGalleryId];
       if (!gallery) return;
+      const prevIndex = openGalleryImageIndex;
       openGalleryImageIndex = (index + gallery.images.length) % gallery.images.length;
+      if (prevIndex !== openGalleryImageIndex) {
+        trackConversion("gallery_engagement", {
+          project_name: openGalleryId,
+          image_index: openGalleryImageIndex + 1,
+          interaction_method: method
+        });
+      }
       const nextSrc = gallery.images[openGalleryImageIndex];
       window.clearTimeout(galleryImageTimer);
       galleryImageWrap.classList.add("is-changing");
@@ -3696,11 +4441,11 @@
         </button>
       `).join("");
       galleryThumbnails.querySelectorAll(".gallery-thumb").forEach(button => {
-        button.addEventListener("click", () => setGalleryImage(Number(button.dataset.index)));
+        button.addEventListener("click", () => setGalleryImage(Number(button.dataset.index), "thumbnail_click"));
       });
       gallery.images.slice(0, 2).forEach(preloadGalleryImage);
       preloadGalleryImage(gallery.images[gallery.images.length - 1]);
-      setGalleryImage(openGalleryImageIndex);
+      setGalleryImage(openGalleryImageIndex, "initial");
     }
 
     function openGallery(galleryId, trigger) {
@@ -3708,6 +4453,13 @@
       galleryTriggerOrigin = trigger || document.activeElement;
       openGalleryId = galleryId;
       openGalleryImageIndex = 0;
+      const source = trigger?.classList?.contains("menu-event-item") ? "menu_list"
+        : (trigger?.classList?.contains("project-gallery-badge") ? "badge_button"
+        : (trigger?.classList?.contains("gallery-link") ? "text_link" : "card_media"));
+      trackConversion("gallery_view", {
+        project_name: galleryId,
+        source: source
+      });
       pushModalHistory("gallery");
       renderGallery();
       galleryOverlay.classList.add("open");
@@ -3722,12 +4474,42 @@
         window.history.back();
         return;
       }
+      trackConversion("gallery_close", {
+        project_name: openGalleryId,
+        last_image_index: openGalleryImageIndex + 1
+      });
       galleryOverlay.classList.remove("open");
       galleryOverlay.setAttribute("aria-hidden", "true");
       clearModalHistory("gallery");
       updateModalLock();
       window.setTimeout(() => galleryTriggerOrigin?.focus?.(), 100);
     }
+
+    const galleryInquireBtn = document.getElementById("galleryInquireBtn");
+    galleryInquireBtn?.addEventListener("click", () => {
+      const gallery = projectGalleries[openGalleryId];
+      const projectTitle = gallery ? gallery.title.replace(/<[^>]*>/g, " ").replace(/&amp;/g, "&").trim() : "Selected Work";
+      const t = texts[activeLanguage] || texts.en;
+      const template = t.galleryProjectInquiry || "Hi Studio Co Labs! I was exploring the {project} project and would like to discuss a collaboration.";
+      const inquiryText = template.replace("{project}", projectTitle);
+
+      trackConversion("gallery_inquire", {
+        channel: "whatsapp",
+        location: "gallery_modal",
+        project_name: openGalleryId,
+        project_title: projectTitle
+      });
+
+      trackConversion("contact_click", {
+        channel: "whatsapp",
+        location: "gallery_modal",
+        project_name: openGalleryId,
+        project_title: projectTitle
+      });
+
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(inquiryText)}`;
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    });
 
     document.querySelectorAll(".gallery-trigger").forEach(trigger => {
       trigger.addEventListener("click", event => {
@@ -3748,15 +4530,15 @@
     galleryOverlay.addEventListener("click", event => {
       if (event.target === galleryOverlay) closeGallery();
     });
-    galleryPrevious.addEventListener("click", () => setGalleryImage(openGalleryImageIndex - 1));
-    galleryNext.addEventListener("click", () => setGalleryImage(openGalleryImageIndex + 1));
+    galleryPrevious.addEventListener("click", () => setGalleryImage(openGalleryImageIndex - 1, "nav_prev"));
+    galleryNext.addEventListener("click", () => setGalleryImage(openGalleryImageIndex + 1, "nav_next"));
 
     function finishGallerySwipe(clientX, clientY) {
       if (!galleryPointerStart) return;
       const deltaX = clientX - galleryPointerStart.x;
       const deltaY = clientY - galleryPointerStart.y;
       const isHorizontalSwipe = Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY) * 1.25;
-      if (isHorizontalSwipe) setGalleryImage(openGalleryImageIndex + (deltaX < 0 ? 1 : -1));
+      if (isHorizontalSwipe) setGalleryImage(openGalleryImageIndex + (deltaX < 0 ? 1 : -1), "swipe_gesture");
       galleryPointerStart = null;
     }
 
@@ -3798,7 +4580,87 @@
       toTop.classList.toggle("visible", window.scrollY > 800);
     }, { passive: true });
 
-    toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    toTop.addEventListener("click", () => {
+      trackConversion("navigation_click", {
+        nav_type: "to_top",
+        location: "floating_button"
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Brand logo navigation
+    document.querySelectorAll(".brand, .footer-brand").forEach(brandLink => {
+      brandLink.addEventListener("click", () => {
+        trackConversion("navigation_click", {
+          nav_type: "brand_logo",
+          location: brandLink.classList.contains("brand") ? "header" : "footer",
+          target_section: "#home"
+        });
+      });
+    });
+
+    // Hero CTA button & Scroll hint
+    document.querySelector(".hero-copy .button-link")?.addEventListener("click", () => {
+      trackConversion("navigation_click", {
+        nav_type: "hero_cta",
+        location: "hero",
+        target_section: "#work",
+        link_text: "Discover our work"
+      });
+    });
+
+    document.querySelector(".scroll-hint")?.addEventListener("click", () => {
+      trackConversion("navigation_click", {
+        nav_type: "scroll_hint",
+        location: "hero",
+        target_section: "#strategy"
+      });
+      document.querySelector(".strategy")?.scrollIntoView({ behavior: "smooth" });
+    });
+
+    // Footer social links
+    document.querySelectorAll(".footer-links a[href*='instagram'], .footer-links a[href*='linkedin']").forEach(link => {
+      link.addEventListener("click", () => {
+        const isInstagram = link.href.includes("instagram");
+        const platform = isInstagram ? "instagram" : "linkedin";
+        trackConversion("social_click", {
+          platform: platform,
+          location: "footer",
+          url: link.href
+        });
+      });
+    });
+
+    // Section Attention & Dwell Time Tracking (Qualified Views)
+    const trackedSections = new Set();
+    const sectionTimers = new Map();
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.id || entry.target.className.split(" ")[0];
+        if (entry.isIntersecting) {
+          if (!trackedSections.has(id)) {
+            const timer = window.setTimeout(() => {
+              if (!trackedSections.has(id)) {
+                trackedSections.add(id);
+                trackConversion("section_view", {
+                  section_name: id
+                });
+              }
+            }, 1400);
+            sectionTimers.set(id, timer);
+          }
+        } else {
+          if (sectionTimers.has(id)) {
+            window.clearTimeout(sectionTimers.get(id));
+            sectionTimers.delete(id);
+          }
+        }
+      });
+    }, { threshold: 0.35 });
+
+    document.querySelectorAll("#hero, .strategy, #work, #services, #clients, #about, .founder, #contact").forEach(sec => {
+      sectionObserver.observe(sec);
+    });
   </script>
 </body>
 </html>

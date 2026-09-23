@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta Web Corporativa Integral | Grupo Asvat - PalmeraTech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --almost-black: #171717;
+      --gray-900: #262626;
+      --gray-800: #404040;
+      --gray-700: #525252;
+      --gray-600: #737373;
+      --gray-400: #a3a3a3;
+      --gray-300: #d4d4d4;
+      --gray-200: #e5e5e5;
+      --gray-100: #f5f5f5;
+      --gray-50: #fafafa;
+      --white: #ffffff;
+      --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--white);
+      color: var(--black);
+      line-height: 1.55;
+      font-size: 13.5px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 44px 36px;
+    }
+
+    /* Header & Branding */
+    header {
+      border-bottom: 2px solid var(--black);
+      padding-bottom: 20px;
+      margin-bottom: 34px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .brand-sub {
+      color: var(--gray-600);
+      font-size: 12.5px;
+      margin-top: 3px;
+    }
+
+    .header-meta {
+      text-align: right;
+      font-size: 12px;
+      color: var(--gray-700);
+      line-height: 1.45;
+    }
+
+    .header-meta strong {
+      color: var(--black);
+      font-weight: 600;
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      padding: 28px;
+      margin-bottom: 32px;
+      border-left: 5px solid var(--black);
+    }
+
+    .pill-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      background: var(--black);
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+
+    .hero-desc {
+      color: var(--gray-700);
+      font-size: 14px;
+      max-width: 820px;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 32px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .section-num {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-300);
+      color: var(--black);
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+    }
+
+    h2 {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--black);
+    }
+
+    p {
+      color: var(--gray-800);
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    /* Benchmark Box */
+    .benchmark-card {
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+      padding: 18px;
+      margin: 14px 0;
+      border-radius: 4px;
+    }
+
+    .benchmark-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .benchmark-link {
+      color: var(--black);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .feature-card {
+      border: 1px solid var(--gray-200);
+      padding: 14px 16px;
+      background: var(--white);
+      border-radius: 4px;
+    }
+
+    .feature-card h4 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: var(--black);
+      letter-spacing: -0.01em;
+    }
+
+    .feature-card p {
+      font-size: 12px;
+      color: var(--gray-700);
+      margin-bottom: 0;
+      line-height: 1.45;
+    }
+
+    /* Tables */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 12.5px;
+    }
+
+    .custom-table th, .custom-table td {
+      padding: 10px 12px;
+      text-align: left;
+      border: 1px solid var(--gray-200);
+    }
+
+    .custom-table th {
+      background: var(--gray-100);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: var(--black);
+    }
+
+    .custom-table td.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .custom-table tr.total-row {
+      background: var(--gray-50);
+      font-weight: 700;
+      border-top: 2px solid var(--black);
+    }
+
+    .custom-table tr.total-row td {
+      font-size: 14px;
+      color: var(--black);
+    }
+
+    .stack-badge {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--black);
+    }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .timeline-week {
+      border: 1px solid var(--gray-300);
+      border-left: 4px solid var(--black);
+      padding: 14px 18px;
+      background: var(--white);
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .timeline-tag {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--black);
+    }
+
+    .timeline-hours {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--gray-700);
+      background: var(--gray-100);
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+
+    .timeline-tasks {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .timeline-tasks li {
+      position: relative;
+      padding-left: 16px;
+      font-size: 12.3px;
+      color: var(--gray-800);
+      margin-bottom: 4px;
+      line-height: 1.45;
+    }
+
+    .timeline-tasks li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--gray-600);
+      font-weight: bold;
+    }
+
+    /* Callout & Conditions */
+    .callout {
+      background: var(--gray-50);
+      border-left: 3px solid var(--gray-700);
+      padding: 12px 16px;
+      font-size: 12.3px;
+      color: var(--gray-800);
+      margin: 14px 0;
+    }
+
+    .callout strong {
+      color: var(--black);
+    }
+
+    /* Differentiator Box */
+    .differentiator-box {
+      border: 1px solid var(--black);
+      padding: 20px;
+      margin-top: 20px;
+      background: var(--white);
+    }
+
+    .differentiator-box h3 {
+      font-family: var(--font-heading);
+      font-size: 14.5px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 2px solid var(--black);
+      padding-top: 20px;
+      margin-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      color: var(--gray-600);
+    }
+
+    .footer-signature {
+      text-align: right;
+    }
+
+    .footer-signature strong {
+      color: var(--black);
+      font-size: 12px;
+      display: block;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        font-size: 11.5px;
+      }
+      .container {
+        padding: 0;
+        max-width: 100%;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+      .avoid-break {
+        page-break-inside: avoid;
+      }
+      header {
+        margin-bottom: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <div>
+        <div class="brand-title">PalmeraTech</div>
+        <div class="brand-sub">Estrategia Digital, Diseño UX/UI & Ingeniería Web Fullstack</div>
+      </div>
+      <div class="header-meta">
+        <div><strong>Contacto:</strong> palmeratech7@gmail.com</div>
+        <div><strong>Web:</strong> palmeratech.net</div>
+        <div><strong>Ubicación:</strong> Panamá</div>
+        <div><strong>Fecha:</strong> Septiembre 2026</div>
+      </div>
+    </header>
+
+    <!-- Hero Title -->
+    <div class="hero-banner">
+      <div class="pill-badge">Propuesta Técnica, Estratégica & Comercial</div>
+      <h1 class="hero-title">Sitio Web Corporativo de Alta Gama, Autoadministrable & Cumplimiento Global</h1>
+      <p class="hero-desc">
+        Diseño UX/UI de estándar internacional, desarrollo Fullstack, módulo No-Code autoadministrable, infraestructura DNS/Email segura, cumplimiento legal europeo (GDPR / Consent Mode v2), accesibilidad universal (WCAG 2.1 AA) y optimización para captación (CRO) para <strong>Grupo Asvat</strong>.
+      </p>
+    </div>
+
+    <!-- 01. Contexto & Benchmark -->
+    <section>
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2>Visión Estratégica & Referente de Inspiración</h2>
+      </div>
+      <p>
+        Tomando como referencia el portal de <a class="benchmark-link" href="https://www.altayer.com" target="_blank">Al Tayer Group</a>, Grupo Asvat proyectará una imagen de grupo empresarial de vanguardia: minimalismo refinado, solidez institucional, transparencia en sus líneas de negocio y una experiencia digital sin fricciones.
+      </p>
+
+      <div class="benchmark-card">
+        <div class="benchmark-title">
+          <span>●</span> El Estándar Al Tayer Group adaptado a Grupo Asvat:
+        </div>
+        <p style="margin-bottom: 5px;">
+          • <strong>Estética Editorial Sobria:</strong> Jerarquía visual basada en contrastes puros (blanco, negro y escala de grises), tipografía limpia y generoso espacio negativo para transmitir solvencia corporativa.
+        </p>
+        <p style="margin-bottom: 5px;">
+          • <strong>Estructuración de Portafolio:</strong> Presentación accesible de divisiones de negocio, gobernanza, trayectoria y pilares institucionales.
+        </p>
+        <p style="margin-bottom: 0;">
+          • <strong>Desempeño Mobile-First:</strong> Experiencia ultrarrápida e interactiva en dispositivos móviles, el canal primario de tomadores de decisiones e inversionistas.
+        </p>
+      </div>
+    </section>
+
+    <!-- 02. Objetivo de Negocio & Propuesta de Valor -->
+    <section class="avoid-break">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2>Objetivo de Negocio & Enfoque Estratégico End-to-End</h2>
+      </div>
+      <p>
+        El objetivo rector es <strong>transformar visitas institucionales en oportunidades comerciales concretas</strong> a través de un canal de contacto confiable, ágil y medible. La integración de diseño y desarrollo en un único interlocutor senior asegura coherencia y velocidad:
+      </p>
+
+      <div class="grid-3">
+        <div class="feature-card">
+          <h4>UX/UI + Fullstack</h4>
+          <p>Dirección unificada de principio a fin. El diseño visual aprobado en Figma se plasma en código Next.js sin distorsión estética ni vacíos técnicos.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Enfoque CRO & Formularios</h4>
+          <p>Formularios interactivos optimizados para tasa de conversión: validaciones en tiempo real, interfaz accesible y sin pasos innecesarios.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Medición GA4 + GTM</h4>
+          <p>Arquitectura de eventos en Google Tag Manager y GA4 para auditar envíos de formularios, canales de adquisición y comportamiento de usuarios.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="feature-card">
+          <h4>Autoadministrable No-Code</h4>
+          <p>Autonomía total: el equipo de Grupo Asvat podrá editar textos, fotografías, titulares y secciones corporativas desde una interfaz simple, sin escribir código.</p>
+        </div>
+        <div class="feature-card">
+          <h4>SEO Institucional + AI SEO</h4>
+          <p>Estructuración semántica Schema.org (JSON-LD) para posicionamiento orgánico clásico y optimización para ser citado por motores de IA (ChatGPT, Perplexity, Gemini).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03. Infraestructura, Cumplimiento & Accesibilidad -->
+    <section class="avoid-break page-break">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2>Infraestructura DNS, Emails, Cumplimiento UE & Accesibilidad</h2>
+      </div>
+      <p>
+        Para resguardar la reputación corporativa de Grupo Asvat, el proyecto incorpora una capa técnica de seguridad, legalidad internacional y accesibilidad universal:
+      </p>
+
+      <div class="grid-2">
+        <div class="feature-card">
+          <h4>Dominio, DNS & Entregabilidad de Emails</h4>
+          <p>
+            • Configuración y vinculación de dominios corporativos en DNS.<br>
+            • Protocolos de autenticación de correo: <strong>SPF, DKIM y DMARC</strong> para evitar suplantaciones (phishing) y asegurar que ningún correo institucional caiga en carpetas de spam.<br>
+            • Notificaciones transaccionales automáticas: aviso inmediato al equipo interno ante cada consulta y confirmación de cortesía al usuario.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h4>Cumplimiento UE (GDPR / RGPD) & Consent Mode v2</h4>
+          <p>
+            • Banner de cookies interactivo y granular con compatibilidad total para <strong>Google Consent Mode v2</strong> (requisito legal para analítica con visitantes europeos).<br>
+            • Bloqueo preventivo de scripts de seguimiento antes del consentimiento explícito del visitante.<br>
+            • Casilla de aceptación informada en formularios y estructura técnica para Políticas de Privacidad.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top: 14px;">
+        <div class="feature-card">
+          <h4>Accesibilidad Web Universal (WCAG 2.1 AA)</h4>
+          <p>
+            • Contraste cromático estricto (mínimo 4.5:1) en paleta monocromática.<br>
+            • Navegación completa mediante teclado (focus visible y salto a contenido principal).<br>
+            • Compatibilidad con lectores de pantalla (Screen Readers) mediante etiquetas semánticas HTML5 y atributos WAI-ARIA en menús y formularios.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h4>Seguridad & Respaldo en Railway</h4>
+          <p>
+            • Alojamiento en infraestructura de alta disponibilidad con certificados SSL/HTTPS automáticos.<br>
+            • Repositorio privado de código en Git con integración y despliegue continuo (CI/CD).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04. Stack Tecnológico -->
+    <section class="avoid-break">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2>Arquitectura y Stack Tecnológico</h2>
+      </div>
+
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Capa</th>
+            <th style="width: 26%;">Tecnología</th>
+            <th>Aporte al Negocio de Grupo Asvat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Frontend</strong></td>
+            <td><span class="stack-badge">Next.js + Sass</span></td>
+            <td>Carga ultra rápida (SSR/SSG), arquitectura Mobile First y código CSS modular limpio sin sobrecargas.</td>
+          </tr>
+          <tr>
+            <td><strong>Backend & Base de Datos</strong></td>
+            <td><span class="stack-badge">Python + PostgreSQL</span></td>
+            <td>Seguridad y estabilidad para procesar formularios, API de gestión y base de datos relacional robusta.</td>
+          </tr>
+          <tr>
+            <td><strong>Autoadministración</strong></td>
+            <td><span class="stack-badge">Panel No-Code Integrado</span></td>
+            <td>Control editorial absoluto sobre textos, imágenes, títulos y portafolio corporativo sin depender de desarrolladores.</td>
+          </tr>
+          <tr>
+            <td><strong>Infraestructura & DNS</strong></td>
+            <td><span class="stack-badge">Railway + DNS Seguro</span></td>
+            <td>Despliegues automáticos con Git, certificados SSL y registros de correo autenticados (SPF, DKIM, DMARC).</td>
+          </tr>
+          <tr>
+            <td><strong>Cumplimiento & Analítica</strong></td>
+            <td><span class="stack-badge">GDPR + GA4 + GTM</span></td>
+            <td>Consent Mode v2 para visitantes de la UE y analítica granular para medir la tasa de conversión (CRO).</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 05. Cronograma de 3 Semanas -->
+    <section class="avoid-break page-break">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2>Cronograma de Entrega (3 Semanas)</h2>
+      </div>
+
+      <div class="callout">
+        <strong>Compromiso de Cumplimiento:</strong> El plazo estipulado de <strong>3 semanas</strong> se mantendrá firme, sujeto a que los contenidos base (logotipos institucionales, textos oficiales, fotografías y aprobaciones intermedias) sean provistos de forma oportuna.
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-week">
+          <div class="timeline-header">
+            <span class="timeline-tag">Semana 1: Estrategia, UX/UI, Accesibilidad & Arquitectura</span>
+            <span class="timeline-hours">36 Horas</span>
+          </div>
+          <ul class="timeline-tasks">
+            <li>Definición de arquitectura de información y jerarquía institucional (Home, Grupo, Divisiones, Gobernanza, Contacto).</li>
+            <li>Diseño de Wireframes y Prototipos de Alta Fidelidad en Figma (versión móvil y escritorio), inspirados en la estética sobria tipo Al Tayer.</li>
+            <li>Establecimiento del sistema de diseño WCAG 2.1 AA (contraste monocromático, tamaños de fuente legibles, navegación por teclado).</li>
+            <li>Revisión interactiva y aprobación del diseño por parte de Grupo Asvat.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-week">
+          <div class="timeline-header">
+            <span class="timeline-tag">Semana 2: Desarrollo Frontend, Backend, Notificaciones & DNS</span>
+            <span class="timeline-hours">40 Horas</span>
+          </div>
+          <ul class="timeline-tasks">
+            <li>Estructuración del proyecto en Next.js con estilos Sass modulares bajo filosofía Mobile-First.</li>
+            <li>Desarrollo de API en Python y base de datos relacional PostgreSQL.</li>
+            <li>Desarrollo del Formulario de Contacto interactivo con validaciones instantáneas y microinteracciones fluidas.</li>
+            <li>Configuración de pasarela de correos transaccionales: alertas instantáneas al buzón de Grupo Asvat y acuse de recibo al usuario.</li>
+            <li>Configuración de DNS institucional, dominios y registros de seguridad de correo (SPF, DKIM y DMARC).</li>
+          </ul>
+        </div>
+
+        <div class="timeline-week">
+          <div class="timeline-header">
+            <span class="timeline-tag">Semana 3: CMS No-Code, Cumplimiento UE, Analítica & Despliegue</span>
+            <span class="timeline-hours">36 Horas</span>
+          </div>
+          <ul class="timeline-tasks">
+            <li>Habilitación y prueba del panel autoadministrable (No-Code) para edición de contenidos, fotos y secciones.</li>
+            <li>Implementación de banner de consentimiento para la Unión Europea (GDPR / Google Consent Mode v2) y enlaces de privacidad.</li>
+            <li>Configuración completa de Google Tag Manager (GTM) y Google Analytics 4 (GA4) orientada a CRO.</li>
+            <li>Optimización para buscadores (SEO semántico) y motores de Inteligencia Artificial (Schema.org / JSON-LD / GEO).</li>
+            <li>Auditoría de accesibilidad (WCAG 2.1 AA), velocidad de carga (Core Web Vitals) y pruebas de penetración básica.</li>
+            <li>Despliegue final en Railway, enlace de dominio con SSL y entrega de credenciales con sesión de capacitación.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. Presupuesto & Inversión -->
+    <section class="avoid-break">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2>Presupuesto de Inversión</h2>
+      </div>
+      <p>
+        El presupuesto se desglosa con base en una tarifa transparente de <strong>$25.00 USD / hora</strong>, cubriendo el ciclo completo de diseño, desarrollo, infraestructura y cumplimiento normativo:
+      </p>
+
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Fase / Módulo</th>
+            <th>Descripción de Alcance y Entregables</th>
+            <th class="num">Horas</th>
+            <th class="num">Inversión (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Fase 1: Estrategia, UX/UI & Accesibilidad</strong></td>
+            <td>Arquitectura de información, wireframes, diseño Figma (Mobile & Desktop), sistema de diseño con estándares WCAG 2.1 AA y estética Al Tayer.</td>
+            <td class="num">36 hrs</td>
+            <td class="num">$900.00</td>
+          </tr>
+          <tr>
+            <td><strong>Fase 2: Desarrollo, Emails & DNS</strong></td>
+            <td>Programación Next.js + Sass, backend Python/PostgreSQL, formulario CRO, configuración de emails transaccionales y registros DNS (SPF, DKIM, DMARC).</td>
+            <td class="num">40 hrs</td>
+            <td class="num">$1,000.00</td>
+          </tr>
+          <tr>
+            <td><strong>Fase 3: CMS, GDPR, Analítica & Despliegue</strong></td>
+            <td>Panel No-Code autoadministrable, consentimiento GDPR con Google Consent Mode v2, medición GA4/GTM, AI SEO / Schema y despliegue en Railway.</td>
+            <td class="num">36 hrs</td>
+            <td class="num">$900.00</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="2"><strong>TOTAL PROYECTO INTEGRAL (Llave en Mano)</strong></td>
+            <td class="num"><strong>112 hrs</strong></td>
+            <td class="num"><strong>$2,800.00 USD</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Condiciones Comerciales -->
+      <div class="callout" style="margin-top: 18px;">
+        <strong>Modalidad de Pago por Hitos:</strong>
+        <ul style="margin-top: 6px; padding-left: 18px; line-height: 1.55;">
+          <li><strong>40% al inicio:</strong> Formalización del acuerdo, levantamiento estratégico y arranque de diseño UX/UI ($1,120.00 USD).</li>
+          <li><strong>30% al completar Fase 2:</strong> Aprobación del entorno de pruebas con desarrollo funcional, emails y formulario operativo ($840.00 USD).</li>
+          <li><strong>30% a la entrega final:</strong> Portal en producción en Railway, panel No-Code entregado, cumplimiento GDPR y analítica activa ($840.00 USD).</li>
+        </ul>
+      </div>
+
+      <!-- Diferenciador -->
+      <div class="differentiator-box">
+        <h3>Propuesta de Valor Exclusiva para Grupo Asvat</h3>
+        <p style="margin-bottom: 6px;">
+          <strong>• Interlocución Senior Directa:</strong> Sin capas burocráticas ni sobrecostos de agencia. Un diseñador y desarrollador fullstack a cargo de la ejecución integral con visión de negocio.
+        </p>
+        <p style="margin-bottom: 6px;">
+          <strong>• Seguridad y Entregabilidad Blindada:</strong> Al configurar correctamente SPF, DKIM, DMARC y DNS, las comunicaciones corporativas de Grupo Asvat quedan protegidas contra suplantación y garantizan que los prospectos lleguen a destino.
+        </p>
+        <p style="margin-bottom: 0;">
+          <strong>• Estándar Internacional Listo para Crecer:</strong> Accesibilidad WCAG 2.1 AA y cumplimiento GDPR permiten a Grupo Asvat relacionarse con socios, fondos e inversionistas internacionales cumpliendo las normativas más rigurosas del mercado global.
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div>
+        <strong>PalmeraTech</strong> — Propuesta Confidencial para Grupo Asvat
+      </div>
+      <div class="footer-signature">
+        <strong>Contacto Directo</strong>
+        palmeratech7@gmail.com | palmeratech.net
+      </div>
+    </footer>
+
+  </div>
+
+</body>
+</html>
